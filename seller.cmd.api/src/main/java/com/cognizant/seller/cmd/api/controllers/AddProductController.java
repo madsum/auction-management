@@ -1,7 +1,7 @@
 package com.cognizant.seller.cmd.api.controllers;
 
 import com.cognizant.seller.cmd.api.config.AppProperty;
-import com.cognizant.seller.cmd.api.config.MQConfig;
+import com.cognizant.user.core.configuration.AuctionMessageQueueConfig;
 import com.cognizant.seller.cmd.api.product.commands.AddProductCommand;
 import com.cognizant.seller.cmd.api.dto.AddProductResponse;
 import com.cognizant.seller.cmd.api.service.StorageService;
@@ -27,13 +27,15 @@ public class AddProductController {
     private final RabbitTemplate template;
     private final StorageService storageService;
     private final AppProperty appProperty;
+    private final AuctionMessageQueueConfig auctionMessageQueueConfig;
 
     @Autowired
-    public AddProductController(CommandGateway commandGateway, RabbitTemplate template, StorageService storageService, AppProperty appProperty) {
+    public AddProductController(CommandGateway commandGateway, RabbitTemplate template, StorageService storageService, AppProperty appProperty, AuctionMessageQueueConfig auctionMessageQueueConfig) {
         this.commandGateway = commandGateway;
         this.template = template;
         this.storageService = storageService;
         this.appProperty = appProperty;
+        this.auctionMessageQueueConfig = auctionMessageQueueConfig;
         this.appProperty.init();
     }
 
@@ -45,8 +47,8 @@ public class AddProductController {
         try {
             commandGateway.sendAndWait(command);
 
-            template.convertAndSend(MQConfig.EXCHANGE,
-                    MQConfig.ROUTING_KEY, command);
+            template.convertAndSend(auctionMessageQueueConfig.EXCHANGE,
+                    auctionMessageQueueConfig.ROUTING_KEY, command);
 
             return new ResponseEntity<>(new AddProductResponse(id, "Product added successfully!"), HttpStatus.CREATED);
         } catch (Exception e) {
@@ -61,8 +63,8 @@ public class AddProductController {
     public String handleFileUpload(@RequestParam("file") MultipartFile file) {
         final String absoluteUploadDir = System.getProperty("user.dir") + File.separator +  Path.of(AppProperty.UPLOAD_DIR);
         byte[] fileByte = storageService.store(file, Paths.get(absoluteUploadDir));
-        template.convertAndSend(MQConfig.EXCHANGE,
-                MQConfig.ROUTING_KEY, MessageUtil.makeCustomMessage(fileByte));
+        template.convertAndSend(auctionMessageQueueConfig.EXCHANGE,
+                auctionMessageQueueConfig.ROUTING_KEY, MessageUtil.makeCustomMessage(fileByte));
         return "uploaded "+file.getOriginalFilename();
     }
 }

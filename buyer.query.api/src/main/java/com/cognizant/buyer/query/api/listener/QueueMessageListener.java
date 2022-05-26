@@ -1,15 +1,15 @@
 package com.cognizant.buyer.query.api.listener;
 
-import com.cognizant.user.core.models.QueueCustomMessage;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.messaging.support.GenericMessage;
 import org.springframework.stereotype.Component;
 
 @Component
-public class QueueMessageListener {
+public class QueueMessageListener{
 
     @RabbitListener(queues = "auction_queue")
-    public void listener(QueueCustomMessage message) {
-        System.out.println(message);
+    public void listener(GenericMessage message) {
+        System.out.println(message.getPayload().toString());
     }
 
 }

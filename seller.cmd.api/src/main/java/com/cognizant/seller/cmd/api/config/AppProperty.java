@@ -1,8 +1,10 @@
 package com.cognizant.seller.cmd.api.config;
 
+import com.cognizant.user.core.configuration.AuctionMessageQueueConfig;
 import com.cognizant.user.core.exceptoins.StorageException;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
@@ -34,5 +36,10 @@ public class AppProperty {
         catch (IOException e) {
             throw new StorageException("Could not initialize storage", e);
         }
+    }
+
+    @Bean
+    public AuctionMessageQueueConfig mQSellerConfig(){
+        return new AuctionMessageQueueConfig();
     }
 }

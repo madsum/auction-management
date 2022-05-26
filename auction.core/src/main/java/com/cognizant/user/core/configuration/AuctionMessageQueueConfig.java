@@ -1,31 +1,34 @@
-package com.cognizant.seller.cmd.api.config;
+package com.cognizant.user.core.configuration;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class MQConfig {
+public class AuctionMessageQueueConfig {
+    @Value("${auction-queue}")
+    public String QUEUE;
+    @Value("${auction-exchange}")
+    public String EXCHANGE;
+    @Value("${auction_routingKey}")
+    public  String ROUTING_KEY;
 
-    public static final String QUEUE = "auction_queue";
-    public static final String EXCHANGE = "auction_exchange";
-    public static final String ROUTING_KEY = "auction_routingKey";
-
-    @Bean
+    @Bean(name = "${auction-queue}")
     public Queue queue() {
         return  new Queue(QUEUE);
     }
 
-    @Bean
+    @Bean(name = "${auction-exchange}")
     public TopicExchange exchange() {
         return new TopicExchange(EXCHANGE);
     }
 
-    @Bean
+    @Bean(name = "${auction_binding}")
     public Binding binding(Queue queue, TopicExchange exchange) {
         return BindingBuilder
                 .bind(queue)
@@ -33,12 +36,12 @@ public class MQConfig {
                 .with(ROUTING_KEY);
     }
 
-    @Bean
+    @Bean(name = "${auction_messageConverter")
     public MessageConverter messageConverter() {
         return  new Jackson2JsonMessageConverter();
     }
 
-    @Bean
+    @Bean(name = "${auction_template}")
     public AmqpTemplate template(ConnectionFactory connectionFactory) {
         RabbitTemplate template = new RabbitTemplate(connectionFactory);
         template.setMessageConverter(messageConverter());
