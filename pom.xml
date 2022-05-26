@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>user.core</module>
+        <module>auction.core</module>
         <module>seller.cmd.api</module>
         <module>buyer.query.api</module>
     </modules>

@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.cognizant</groupId>
-	<artifactId>user.core</artifactId>
+	<artifactId>auction.core</artifactId>
 	<version>1.0.0</version>
-	<name>user.core</name>
 	<description>The User Core Project</description>
+	<name>auction.core</name>
 
 	<properties>
 		<java.version>15</java.version>
