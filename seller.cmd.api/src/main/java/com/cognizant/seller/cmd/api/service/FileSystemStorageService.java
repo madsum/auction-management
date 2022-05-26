@@ -1,7 +1,7 @@
 package com.cognizant.seller.cmd.api.service;
 
 import com.cognizant.seller.cmd.api.config.AppProperty;
-import com.cognizant.seller.cmd.api.exceptoins.StorageException;
+import com.cognizant.user.core.exceptoins.StorageException;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;

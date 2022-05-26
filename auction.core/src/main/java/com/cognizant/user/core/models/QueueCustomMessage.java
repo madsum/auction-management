@@ -1,11 +1,9 @@
-package com.cognizant.seller.cmd.api.model;
+package com.cognizant.user.core.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
-import java.util.Date;
 
 @Data
 @NoArgsConstructor

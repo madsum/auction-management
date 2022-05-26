@@ -1,6 +1,6 @@
 package com.cognizant.seller.cmd.api.config;
 
-import com.cognizant.seller.cmd.api.exceptoins.StorageException;
+import com.cognizant.user.core.exceptoins.StorageException;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +22,7 @@ public class AppProperty {
     public static Path uploadPath;
 
     public void init(){
-                AppProperty.UPLOAD_DIR = upload_dir;
+        AppProperty.UPLOAD_DIR = upload_dir;
         makeUploadPath();
     }
 

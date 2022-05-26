@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
@@ -58,7 +59,7 @@ public class AddProductController {
 
     @PostMapping("/upload")
     public String handleFileUpload(@RequestParam("file") MultipartFile file) {
-        final String absoluteUploadDir = System.getProperty("user.dir") + Path.of(AppProperty.UPLOAD_DIR);
+        final String absoluteUploadDir = System.getProperty("user.dir") + File.separator +  Path.of(AppProperty.UPLOAD_DIR);
         byte[] fileByte = storageService.store(file, Paths.get(absoluteUploadDir));
         template.convertAndSend(MQConfig.EXCHANGE,
                 MQConfig.ROUTING_KEY, MessageUtil.makeCustomMessage(fileByte));

@@ -1,4 +1,4 @@
-package com.cognizant.seller.cmd.api.exceptoins;
+package com.cognizant.user.core.exceptoins;
 
 public class StorageException extends RuntimeException {
 
