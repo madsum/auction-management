@@ -33,10 +33,10 @@ public class UserAggregate {
     public UserAggregate(RegisterUserCommand command) {
         var newUser = command.getUser();
         newUser.setId(command.getId());
-        var password = newUser.getAccount().getPassword();
+        var password = newUser.getPassword();
         passwordEncoder = new PasswordEncoderImpl();
         var hashedPassword = passwordEncoder.hashPassword(password);
-        newUser.getAccount().setPassword(hashedPassword);
+        newUser.setPassword(hashedPassword);
 
         var event = UserRegisteredEvent.builder()
                 .id(command.getId())
@@ -50,9 +50,9 @@ public class UserAggregate {
     public void handle(UpdateUserCommand command) {
         var updatedUser = command.getUser();
         updatedUser.setId(command.getId());
-        var password = updatedUser.getAccount().getPassword();
+        var password = updatedUser.getPassword();
         var hashedPassword = passwordEncoder.hashPassword(password);
-        updatedUser.getAccount().setPassword(hashedPassword);
+        updatedUser.setPassword(hashedPassword);
 
         var event = UserUpdatedEvent.builder()
                 .id(UUID.randomUUID().toString())

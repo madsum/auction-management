@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Data
 @AllArgsConstructor
@@ -20,13 +21,19 @@ import javax.validation.constraints.NotNull;
 public class User {
     @Id
     private String id;
-    @NotEmpty(message = "firstname is mandatory")
-    private String firstname;
-    @NotEmpty(message = "lastname is mandatory")
-    private String lastname;
+    @NotEmpty(message = "fullN name is mandatory")
+    private String fullName;
+    @Size(min = 4, max = 24, message = "username must have a minimum of 4 characters and maximum 24")
+    private String username;
     @Email(message = "please provide a valid email address")
-    private String emailAddress;
+    private String email;
+    @Size(min = 8, message = "password must have a minimum of 8 characters")
+    private String password;
+    @NotEmpty(message = "userType is mandatory")
+    private UserType userType;
+/*
     @NotNull(message = "please provide account credentials")
     @Valid
     private Account account;
+*/
 }
