@@ -24,7 +24,7 @@ public class User {
     @NotEmpty(message = "fullN name is mandatory")
     private String fullName;
     @Size(min = 4, max = 24, message = "username must have a minimum of 4 characters and maximum 24")
-    private String username;
+    private String userName;
     @Email(message = "please provide a valid email address")
     private String email;
     @Size(min = 8, message = "password must have a minimum of 8 characters")
