@@ -14,8 +14,6 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedMethods("GET", "PUT", "POST", "PATCH", "DELETE", "OPTIONS")
                 .allowedOrigins("*")
-                .allowedOrigins("http://localhost:3000",
-                        "https://profile-front.herokuapp.com/",
-                        "https://gb6hd.csb.app/");
+                .allowedOrigins("http://localhost:3000");
     }
 }
