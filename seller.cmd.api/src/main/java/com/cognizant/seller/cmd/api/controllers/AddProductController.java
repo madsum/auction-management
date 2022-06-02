@@ -48,7 +48,7 @@ public class AddProductController {
             commandGateway.sendAndWait(command);
 
             template.convertAndSend(auctionMessageQueueConfig.EXCHANGE,
-                    auctionMessageQueueConfig.ROUTING_KEY, command);
+                    auctionMessageQueueConfig.ROUTING_KEY, MessageUtil.makeCustomMessage(command));
 
             return new ResponseEntity<>(new AddProductResponse(id, "Product added successfully!"), HttpStatus.CREATED);
         } catch (Exception e) {

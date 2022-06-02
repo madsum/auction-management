@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -13,5 +14,8 @@ import java.io.Serializable;
 @ToString
 public class QueueCustomMessage  implements Serializable {
     private String message;
+    private String name;
+    private int price;
+    private int auctionHours;
     private byte[] pictureByte;
 }
