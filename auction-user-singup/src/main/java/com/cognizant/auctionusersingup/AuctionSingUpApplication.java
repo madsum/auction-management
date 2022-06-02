@@ -6,6 +6,10 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import com.cognizant.auctionusersingup.repository.UserDetailsRepository;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,7 +19,7 @@ import com.cognizant.auctionusersingup.entities.Authority;
 import com.cognizant.auctionusersingup.entities.User;
 
 @SpringBootApplication
-public class SpringSecurityDemoAppApplication {
+public class AuctionSingUpApplication {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -24,7 +28,7 @@ public class SpringSecurityDemoAppApplication {
 	private UserDetailsRepository userDetailsRepository;
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringSecurityDemoAppApplication.class, args);
+		SpringApplication.run(AuctionSingUpApplication.class, args);
 	}
 	
 	@PostConstruct
@@ -32,9 +36,9 @@ public class SpringSecurityDemoAppApplication {
 		
 		List<Authority> authorityList=new ArrayList<>();
 		
-		authorityList.add(createAuthority("BUYER","User buyer role"));
-		authorityList.add(createAuthority("SELLER","User seller role"));
-		authorityList.add(createAuthority("ADMIN","User admin role"));
+		authorityList.add(createAuthority("BUYER"));
+/*		authorityList.add(createAuthority("SELLER"));
+		authorityList.add(createAuthority("ADMIN"));*/
 		
 		User user=new User();
 		user.setUserName("admin");
@@ -43,9 +47,8 @@ public class SpringSecurityDemoAppApplication {
 		user.setEnabled(true);
 		user.setAuthorities(authorityList);
 		userDetailsRepository.save(user);
-
 		authorityList=new ArrayList<>();
-		authorityList.add(createAuthority("USER","User role"));
+		authorityList.add(createAuthority("USER"));
 
 		User user2=new User();
 		user2.setUserName("madsum");
@@ -56,10 +59,9 @@ public class SpringSecurityDemoAppApplication {
 		userDetailsRepository.save(user2);
 	}
 	
-	private Authority createAuthority(String roleCode,String roleDescription) {
+	private Authority createAuthority(String roleCode) {
 		Authority authority=new Authority();
 		authority.setRoleCode(roleCode);
-		authority.setRoleDescription(roleDescription);
 		return authority;
 	}
 	

@@ -50,9 +50,9 @@ public class AuthenticationController {
 		String jwtToken=jWTTokenHelper.generateToken(user.getUsername());
 		
 		LoginResponse response=new LoginResponse();
+		response.setUser(user);
 		response.setToken(jwtToken);
 		
-
 		return ResponseEntity.ok(response);
 	}
 	
