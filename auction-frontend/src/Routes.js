@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import  { Router, Switch, Route } from "react-router-dom";
-import Game from './Game/Game'
 import RegisterUser from './RegisterUser/RegisterUser';
 import Login from './Login/Login';
 import Auction from "./Auction/Auction";
-import ViewResult from './ViewResult/ViewResult';
 import history from './history';
+import { Sell } from "./Sell/Sell";
+import { Buy } from "./Buy/Buy";
 
 export default class Routes extends Component {
     render() {
@@ -15,8 +15,8 @@ export default class Routes extends Component {
                     <Route path="/" exact component={RegisterUser} />
                     <Route path="/signin" exact component={Login} />
                     <Route path="/auction" exact component={Auction} />
-                    <Route path="/game/:title" exact component={Game} />
-                    <Route path="/result" exact component={ViewResult} />
+                    <Route path="/sell" exact component={Sell} />
+                    <Route path="/buy" exact component={Buy} />
                 </Switch>
             </Router>
         )

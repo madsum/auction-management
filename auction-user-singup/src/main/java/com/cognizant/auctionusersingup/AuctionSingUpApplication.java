@@ -46,6 +46,7 @@ public class AuctionSingUpApplication {
 		user.setEmail("admin@admin.com");
 		user.setEnabled(true);
 		user.setAuthorities(authorityList);
+		user.setRole("ADMIN");
 		userDetailsRepository.save(user);
 		authorityList=new ArrayList<>();
 		authorityList.add(createAuthority("USER"));
@@ -56,6 +57,7 @@ public class AuctionSingUpApplication {
 		user2.setEmail("madsum@gmail.com");
 		user2.setEnabled(true);
 		user2.setAuthorities(authorityList);
+		user2.setRole("SELLER");
 		userDetailsRepository.save(user2);
 	}
 	

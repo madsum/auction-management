@@ -1,11 +1,9 @@
-import { useRef, useState, useEffect, useContext } from 'react';
-import AuthContext from "../context/AuthProvider";
+import { useRef, useState, useEffect } from 'react';
 
 import axios from 'axios';
 const LOGIN_URL = 'http://localhost:8083/api/v1/auth/login';
 
-const Login = () => {
-    const { setAuth } = useContext(AuthContext);
+const Login = props => {
     const userRef = useRef();
     const errRef = useRef();
 
@@ -45,10 +43,13 @@ const Login = () => {
             setUser('');
             setPwd('');
             setSuccess(true);
+            props.history.push("/auction",{ role: respUser?.role}); 
+            /*
             this.context.router.push({
                 pathname: '/auction',
-                state: {role: respUser?.user?.authorities?.roleCode}  
+                state: {role: respUser?.role}  
             })
+            */
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
@@ -110,6 +111,6 @@ const Login = () => {
             )}
         </>
     )
-}
+};
 
 export default Login

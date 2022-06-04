@@ -1,11 +1,12 @@
 package com.cognizant.seller.cmd.api.controllers;
 
 import com.cognizant.seller.cmd.api.config.AppProperty;
-import com.cognizant.user.core.configuration.AuctionMessageQueueConfig;
-import com.cognizant.seller.cmd.api.product.commands.AddProductCommand;
 import com.cognizant.seller.cmd.api.dto.AddProductResponse;
+import com.cognizant.seller.cmd.api.product.commands.AddProductCommand;
 import com.cognizant.seller.cmd.api.service.StorageService;
 import com.cognizant.seller.cmd.api.util.MessageUtil;
+import com.cognizant.user.core.configuration.AuctionMessageQueueConfig;
+import com.cognizant.user.core.models.Product;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,12 +60,19 @@ public class AddProductController {
         }
     }
 
-    @PostMapping("/upload")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file) {
-        final String absoluteUploadDir = System.getProperty("user.dir") + File.separator +  Path.of(AppProperty.UPLOAD_DIR);
+    @PostMapping(path = "/upload4")
+    public String submit(
+            @ModelAttribute Product product) {
+        String name = product.getName();
+        MultipartFile file = product.getFile();
+
+        final String absoluteUploadDir = System.getProperty("user.dir") + File.separator + Path.of(AppProperty.UPLOAD_DIR);
         byte[] fileByte = storageService.store(file, Paths.get(absoluteUploadDir));
         template.convertAndSend(auctionMessageQueueConfig.EXCHANGE,
                 auctionMessageQueueConfig.ROUTING_KEY, MessageUtil.makeCustomMessage(fileByte));
-        return "uploaded "+file.getOriginalFilename();
+        return "uploaded " + file.getOriginalFilename();
+
     }
+
+
 }

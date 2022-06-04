@@ -5,7 +5,7 @@ import axios from 'axios';
 import * as React from 'react';
 
 const   FULL_NAME_REGX = /^[a-zA-Z0-9 ]+$/;
-const EMAIL_REGX = /^(?![\w\.@]*\.\.)(?![\w\.@]*\.@)(?![\w\.]*@\.)\w+[\w\.]*@[\w\.]+\.\w{2,}$/
+const EMAIL_REGX = /^(?![\w\.@]*\.\.)(?![\w\.@]*\.@)(?![\w\.]*@\.)\w+[\w\.]*@[\w\.]+\.\w{2,}$/;
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = 'http://localhost:8083/api/v1/register';
@@ -81,7 +81,8 @@ const RegisterUser = () => {
                     password: password,
                     fullName: fullName,
                     email: email,
-                    authorities: [{"roleCode":role,"authority":role}]
+                    authorities: [{"roleCode":role,"authority":role}],
+                    role: role
                 }
             console.log("user: "+JSON.stringify(user));
             const response = await axios.post(REGISTER_URL,

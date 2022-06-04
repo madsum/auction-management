@@ -42,6 +42,9 @@ public class User implements UserDetails {
 	@JoinTable(name = "AUTH_USER_ID_TABLE", joinColumns = @JoinColumn(referencedColumnName = "id"),inverseJoinColumns = @JoinColumn(referencedColumnName ="id"))
 	private List<Authority> authorities;
 
+	@Column(name = "role")
+	public String role;
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return authorities;
@@ -120,7 +123,12 @@ public class User implements UserDetails {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-	
-	
 
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 }
