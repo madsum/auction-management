@@ -22,7 +22,7 @@ public class RegisterUserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> login(@RequestBody @Valid User user){
+    public ResponseEntity<?> register(@RequestBody @Valid User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User savedUser = null;
         try {
@@ -32,11 +32,4 @@ public class RegisterUserController {
         }
         return  ResponseEntity.ok(savedUser);
     }
-
-/*    private Authority createAuthority(String roleCode, String roleDescription) {
-        Authority authority=new Authority();
-        authority.setRoleCode(roleCode);
-        authority.setRoleDescription(roleDescription);
-        return authority;
-    }*/
 }

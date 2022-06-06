@@ -13,13 +13,14 @@ import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Document(collection = "products")
-public class Product {
+public class Product implements Serializable {
     @Id
     private String id;
     @NotEmpty(message = "name is mandatory")
@@ -28,5 +29,7 @@ public class Product {
     private int price;
     @Transient
     private byte[] pictureByte;
+    @Transient
     private MultipartFile file;
+    private String fileUrl;
 }

@@ -1,27 +1,30 @@
 package com.cognizant.buyer.query.api.controllers;
 
 import com.cognizant.buyer.query.api.dto.ProductLookupResponse;
+import com.cognizant.buyer.query.api.repositories.ProductRepository;
 import com.cognizant.buyer.query.api.user.queries.FindAllUsersQuery;
 import com.cognizant.buyer.query.api.user.queries.FindUserByIdQuery;
 import com.cognizant.buyer.query.api.user.queries.SearchUsersQuery;
+import com.cognizant.user.core.models.Product;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/v1/productLookup")
 public class ProductLookupController {
     private final QueryGateway queryGateway;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public ProductLookupController(QueryGateway queryGateway) {
+    public ProductLookupController(QueryGateway queryGateway, ProductRepository productRepository) {
         this.queryGateway = queryGateway;
+        this.productRepository = productRepository;
     }
     @GetMapping(path = "/")
     public ResponseEntity<ProductLookupResponse> getAllUsers() {
@@ -78,5 +81,16 @@ public class ProductLookupController {
 
             return new ResponseEntity<>(new ProductLookupResponse(safeErrorMessage), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping(path = "/all-product")
+    public List<Product> getAllProduct(){
+       var products =  productRepository.findAll();
+       return products;
+    }
+
+    @DeleteMapping(path = "/delete-all-product")
+    public void deleteAllProduct(){
+          productRepository.deleteAll();
     }
 }

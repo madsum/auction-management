@@ -1,6 +1,6 @@
 
 import React, { Component } from "react";
-import axios from 'axios';
+import CurdApi from "../Utility/CurdApi";
 
 const SELL_URL = 'http://localhost:8081/api/v1/addProduct/upload4';
 
@@ -37,25 +37,14 @@ export class Sell extends Component {
         this.setState({price : ''}) 
         this.setState({file : ''}) 
       } 
-
+        //{"id":null,"product":{"id":null,"name":"name","price":10,"pictureByte":null,"file":null}}
       async handleSubmit(event) {
         event.preventDefault();
-        try {
-            let formData = new FormData();    
-            formData.append("name", this.state.name);
-            formData.append("price", this.state.price);
-            formData.append("file", this.state.file);
-            
-            const response = await axios.post(SELL_URL, formData , {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                  }
-              });
+        let respose = await CurdApi.postProduct(this.state.name, this.state.price, this.state.file);
+        if(respose?.data){
             this.clearState();
             event.target.reset();
             this.props.history.push("/buy"); 
-        } catch (err) {
-           console.log(JSON.stringify(err));
         }
       }
     
