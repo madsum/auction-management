@@ -1,18 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.0</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
 
-    <groupId>com.cognizant</groupId>
-    <artifactId>auction-management</artifactId>
-    <version>1.0</version>
-    <packaging>pom</packaging>
+	<groupId>com.cognizant</groupId>
+	<artifactId>auction</artifactId>
+	<name>auction</name>
+	<description>Auction project for Cognizant</description>
+	<version>1.0</version>
+	<packaging>pom</packaging>
 
-    <modules>
-        <module>auction.core</module>
-        <module>seller.cmd.api</module>
-        <module>buyer.query.api</module>
-        <module>auction-user-singup</module>
-    </modules>
+	<properties>
+		<java.version>15</java.version>
+	</properties>
+
+	<modules>
+		<module>core</module>
+		<module>product.query.api</module>
+		<module>product.cmd.api</module>
+		<module>auction.user.singup</module>
+	</modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

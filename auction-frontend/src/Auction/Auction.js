@@ -7,11 +7,7 @@ export class Auction extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          role: props?.location?.state?.role,
-          isLoggin: false,
-          isBuyer: false,
-          isSeller: false,
-          isAdmin: false
+          logedUser: props?.location?.state?.logedUser,
         };
         this.handleChange = this.handleChange.bind(this);
       }
@@ -32,7 +28,7 @@ export class Auction extends Component {
     render() {
         return (
             <div className="Home">
-              {this.state?.role == null ? (
+              {this.state?.logedUser == null ? (
                 <section style={{background: "white"}}>
                     <h1>Please login first!</h1>
                     <p>
@@ -42,27 +38,13 @@ export class Auction extends Component {
             ) : (
                 <section style={{background: "white"}}>
                     <p>
+                      <Button variant="btn btn-primary" onClick={() => this.props.history.push('/sell/',{logedUser: this.state.logedUser})}>Sell</Button>
                         <a href="/sell">Sell</a>  
                     </p>
                     <p>
                         <a href="/buy">Buy</a> 
                     </p>
                 </section>
-              
-            /*
-              <form>
-                <h3>You are loggedin:</h3>
-                <label>
-                    Player Name:
-                    <input type="text" value={this.state.playerName}  
-                    onChange={this.handleChange} 
-                    onKeyDown={this.handleKeyDown}/>
-                </label>
-                <br/>
-                <Button variant="btn btn-success" onClick={() =>  history.push('/Game/'+this.state.playerName)}>Register</Button>
-              </form>
-
-              */
         )}
         </div>
     )}

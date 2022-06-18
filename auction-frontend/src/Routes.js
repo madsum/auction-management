@@ -6,6 +6,7 @@ import Auction from "./Auction/Auction";
 import history from './history';
 import { Sell } from "./Sell/Sell";
 import { Buy } from "./Buy/Buy";
+import { Bid } from "./Bid/Bid";
 
 export default class Routes extends Component {
     render() {
@@ -17,6 +18,7 @@ export default class Routes extends Component {
                     <Route path="/auction" exact component={Auction} />
                     <Route path="/sell" exact component={Sell} />
                     <Route path="/buy" exact component={Buy} />
+                    <Route path="/bidProduct" exact component={Bid} />
                 </Switch>
             </Router>
         )

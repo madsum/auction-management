@@ -14,8 +14,8 @@ export class Buy extends Component {
 
     async componentWillMount(){
         try {
-            let profiles = await CurdApi.getAllProduct();
-            this.setState({ productState: profiles });
+            let products = await CurdApi.getAllProduct();
+            this.setState({ productState: products });
         } catch (error) {
             console.log(error);
         }
@@ -24,7 +24,7 @@ export class Buy extends Component {
     showUrl(url){
         if(url){
             return <a href= {url} 
-            target="_blank" rel="noopener noreferrer" >Profile Photo</a>;
+            target="_blank" rel="noopener noreferrer" >product Photo</a>;
         }else{
             return "No photo"     
         }
@@ -40,43 +40,26 @@ export class Buy extends Component {
                         <Table style={{ width: "auto", tableLayout: "auto" }}>
                             <Table.Header>
                                 <Table.Row>
-                                    <Table.HeaderCell style={{ Width: '50px' }}>Id</Table.HeaderCell>
-                                    <Table.HeaderCell>Display Name</Table.HeaderCell>
-                                    <Table.HeaderCell>Birth Date</Table.HeaderCell>
-                                    <Table.HeaderCell>Gender</Table.HeaderCell>
-                                    <Table.HeaderCell>Ethnicity</Table.HeaderCell>
-                                    <Table.HeaderCell>Religion</Table.HeaderCell>
-                                    <Table.HeaderCell>Height</Table.HeaderCell>
-                                    <Table.HeaderCell>About Me</Table.HeaderCell>
-                                    <Table.HeaderCell>Location</Table.HeaderCell>
-                                    <Table.HeaderCell>Photo</Table.HeaderCell>
-                                    <Table.HeaderCell>Edit profile</Table.HeaderCell>
+                                        <Table.HeaderCell>Product Name</Table.HeaderCell>
+                                    <Table.HeaderCell>Price</Table.HeaderCell>
+                                    <Table.HeaderCell>Seller Name</Table.HeaderCell>
+                                    <Table.HeaderCell>Bid product</Table.HeaderCell>
                                 </Table.Row>
                             </Table.Header>
                             <Table.Body>
-                                {this.state.productState.map((profile) => {
+                                {this.state.productState.map((product) => {
                                     return (
-                                        <Table.Row key={profile.id}>
-                                            <Table.Cell>{profile.id}</Table.Cell>
-                                            <Table.Cell>{profile.display_name}</Table.Cell>
-                                            <Table.Cell>{profile.birth_date}</Table.Cell>
-                                            <Table.Cell>{profile.gender}</Table.Cell>
-                                            <Table.Cell>{profile.ethnicity}</Table.Cell>
-                                            <Table.Cell>{profile.religion}</Table.Cell>
-                                            <Table.Cell>{profile.height}</Table.Cell>
-                                            <Table.Cell>{profile.about_me}</Table.Cell>
-                                            <Table.Cell>{profile.city_location}</Table.Cell>
-                                            <TableCell>
-                                                {this.showUrl(profile.fileDownloadUri)}
-                                            </TableCell>
-                                            
+                                        <Table.Row key={product.id}>
+                                            <Table.Cell>{product.name}</Table.Cell>
+                                            <Table.Cell>{product.price}</Table.Cell>
+                                            <Table.Cell>{product.sellerName}</Table.Cell>
                                             <Table.Cell><Link to={{
-                                                pathname: "/EditProfile",
+                                                pathname: "/bidProduct",
                                                 state: {
-                                                    title: "Edit Profile",
-                                                    profile: profile
+                                                    title: "Bid product",
+                                                    product: product
                                                 }
-                                            }} >Edit Profile</Link>
+                                            }} >Bid product</Link>
                                             </Table.Cell>
                                         </Table.Row>
                                     );

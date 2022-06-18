@@ -36,18 +36,19 @@ const Login = props => {
             console.log(JSON.stringify(response?.data?.token));
             const accessToken = response?.data?.token;
             const roles = response?.data?.roles;
-            const respUser = response?.data?.user;
+            const logedUser = response?.data?.user;
             console.log("accessToken: "+accessToken);
             console.log("roles: "+roles);
-            console.log("respUser: "+JSON.stringify(respUser));            
+            console.log("logedUser: "+JSON.stringify(logedUser));            
             setUser('');
             setPwd('');
             setSuccess(true);
-            props.history.push("/auction",{ role: respUser?.role}); 
+            props.history.push("/auction",{ logedUser: logedUser}); 
+          //  props.history.push("/auction",{ role: logedUser?.role}); 
             /*
             this.context.router.push({
                 pathname: '/auction',
-                state: {role: respUser?.role}  
+                state: {role: logedUser?.role}  
             })
             */
         } catch (err) {

@@ -2,15 +2,15 @@
 import React, { Component } from "react";
 import CurdApi from "../Utility/CurdApi";
 
-const SELL_URL = 'http://localhost:8081/api/v1/addProduct/upload4';
-
 export class Sell extends Component {
     constructor(props) {
-        super(props);
-        this.state = {
+      super(props);
+      this.state = {
+            logedUser: props?.location?.state?.logedUser,
             name: '',
             price: 0,
-            file: ''
+            file: '',
+            sellerName: props?.location?.state?.logedUser?.fullName
         };
     
         this.handleChangeName = this.handleChangeName.bind(this);
@@ -37,10 +37,9 @@ export class Sell extends Component {
         this.setState({price : ''}) 
         this.setState({file : ''}) 
       } 
-        //{"id":null,"product":{"id":null,"name":"name","price":10,"pictureByte":null,"file":null}}
       async handleSubmit(event) {
         event.preventDefault();
-        let respose = await CurdApi.postProduct(this.state.name, this.state.price, this.state.file);
+        let respose = await CurdApi.postProduct(this.state.name, this.state.price, this.state.file, this.state.sellerName);
         if(respose?.data){
             this.clearState();
             event.target.reset();
@@ -49,7 +48,17 @@ export class Sell extends Component {
       }
     
       render() {
+        console.log(JSON.stringify(this.state.logedUser));
         return (
+          <div className="Home">
+            {this.state?.logedUser?.role !== "SELLER" ? (
+            <section style={{background: "white"}}>
+                <h1>Only seller can access this seller page. Please sign in as a seller</h1>
+                <p>
+                    <a href="/signin">Sign In</a>
+                </p>
+            </section>
+        ) : (
           <form onSubmit={this.handleSubmit}>
             <label>
               Item name:{' '}
@@ -64,9 +73,14 @@ export class Sell extends Component {
               <input type="file" file={this.state.file} onChange={this.handleChangeFile} 
               name="file" accept="image/apng, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/webp"></input>
             </label>
+            <label>
+              Seller name:{' '} {this.state.sellerName}
+            </label>
             
             <input type="submit" value="Submit" />
           </form>
-        );
-      }
+        )}
+        </div> 
+        )
     }
+  }
