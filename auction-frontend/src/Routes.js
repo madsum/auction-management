@@ -7,6 +7,8 @@ import history from './history';
 import { Sell } from "./Sell/Sell";
 import { Buy } from "./Buy/Buy";
 import { Bid } from "./Bid/Bid";
+import Product from "./Product/Product";
+import ImageUploadPreview from "./Product/Test"
 
 export default class Routes extends Component {
     render() {
@@ -19,6 +21,7 @@ export default class Routes extends Component {
                     <Route path="/sell" exact component={Sell} />
                     <Route path="/buy" exact component={Buy} />
                     <Route path="/bidProduct" exact component={Bid} />
+                    <Route path="/test" exact component={ImageUploadPreview} />
                 </Switch>
             </Router>
         )

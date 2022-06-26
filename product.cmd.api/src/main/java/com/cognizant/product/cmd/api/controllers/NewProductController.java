@@ -2,6 +2,7 @@ package com.cognizant.product.cmd.api.controllers;
 
 import com.cognizant.core.configuration.AppMessageQueueConfig;
 import com.cognizant.core.models.Product;
+import com.cognizant.core.models.ProductRequest;
 import com.cognizant.product.cmd.api.commands.NewProductCommand;
 import com.cognizant.product.cmd.api.config.AppProperty;
 import com.cognizant.product.cmd.api.dto.NewProductResponse;
@@ -44,11 +45,15 @@ public class NewProductController {
     }
 
     @PostMapping
-    public ResponseEntity<NewProductResponse> registerUser(@Valid @ModelAttribute("product") Product product) {
-        MultipartFile file = product.getFile();
+    public ResponseEntity<NewProductResponse> addProduct(@Valid @ModelAttribute("product") ProductRequest productRequest) {
+        MultipartFile file = productRequest.getFile();
         final String absoluteUploadDir = System.getProperty("user.dir") + File.separator + Path.of(AppProperty.UPLOAD_DIR);
-        String fileUrl = absoluteUploadDir+ File.separator + file.getOriginalFilename();
-        product.setFileUrl(fileUrl);
+        Product product = new Product();
+        String filename = file.getOriginalFilename();
+        product.setProductName(productRequest.getName());
+        product.setPhotoFileName(filename);
+        product.setPrice(productRequest.getPrice());
+        product.setSellerName(productRequest.getSellerName());
 
         byte[] fileByte = storageService.store(file, Paths.get(absoluteUploadDir));
         template.convertAndSend(appMessageQueueConfig.EXCHANGE,
@@ -63,7 +68,6 @@ public class NewProductController {
 
         try {
             commandGateway.sendAndWait(command);
-
             return new ResponseEntity<>(new NewProductResponse(id, "Product successfully registered!"), HttpStatus.CREATED);
         } catch (Exception e) {
             var safeErrorMessage = "Error while processing new product request for id - " + id;

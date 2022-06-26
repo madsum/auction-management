@@ -38,11 +38,10 @@ export class Auction extends Component {
             ) : (
                 <section style={{background: "white"}}>
                     <p>
-                      <Button variant="btn btn-primary" onClick={() => this.props.history.push('/sell/',{logedUser: this.state.logedUser})}>Sell</Button>
-                        <a href="/sell">Sell</a>  
+                      <Button variant="btn btn-info" onClick={() => this.props.history.push('/sell/',{logedUser: this.state.logedUser})}>Sell</Button>
                     </p>
                     <p>
-                        <a href="/buy">Buy</a> 
+                      <Button variant="btn btn-info" onClick={() => this.props.history.push('/sell/',{logedUser: this.state.logedUser})}>Buy</Button>
                     </p>
                 </section>
         )}

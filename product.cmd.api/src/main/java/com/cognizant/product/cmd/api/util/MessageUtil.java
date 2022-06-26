@@ -16,7 +16,7 @@ public class MessageUtil {
     public static QueueCustomMessage makeCustomMessage(NewProductCommand command){
         QueueCustomMessage customMessage = new QueueCustomMessage();
         customMessage.setPrice(command.getProduct().getPrice());
-        customMessage.setName(command.getProduct().getName());
+        customMessage.setName(command.getProduct().getProductName());
         return customMessage;
     }
 }

@@ -8,11 +8,11 @@ export class Buy extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            productState: "Loading...",
+            productState: []
         }
     }
 
-    async componentWillMount(){
+    async UNSAFE_componentWillMount(){
         try {
             let products = await CurdApi.getAllProduct();
             this.setState({ productState: products });
@@ -50,7 +50,7 @@ export class Buy extends Component {
                                 {this.state.productState.map((product) => {
                                     return (
                                         <Table.Row key={product.id}>
-                                            <Table.Cell>{product.name}</Table.Cell>
+                                            <Table.Cell>{product.productName}</Table.Cell>
                                             <Table.Cell>{product.price}</Table.Cell>
                                             <Table.Cell>{product.sellerName}</Table.Cell>
                                             <Table.Cell><Link to={{

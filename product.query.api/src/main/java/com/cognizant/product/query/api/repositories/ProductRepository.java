@@ -7,6 +7,6 @@ import org.springframework.data.mongodb.repository.Query;
 import java.util.List;
 
 public interface ProductRepository extends MongoRepository<Product, String> {
-    @Query("{'$or' : [{'name': {$regex : ?0, $options: '1'}}, {'price': {$regex : ?0, $options: '1'}}, {'sellerName': {$regex : ?0, $options: '1'}}]}")
+    @Query("{'$or' : [{'name': {$regex : ?0, $options: '1'}}, {'price': {$regex : ?0, $options: '1'}}, {'sellerName': {$regex : ?0, $options: '1'}}, {'fileName': {$regex : ?0, $options: '1'}}]}")
     List<Product> findByFilterRegex(String filter);
 }

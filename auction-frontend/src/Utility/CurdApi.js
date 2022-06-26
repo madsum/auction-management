@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const SELL_URL = 'http://localhost:8081/api/v1/addProduct/  ';
-const BUY_URL = 'http://localhost:8082/api/v1/productLookup/all-product';
+const SELL_URL = 'http://localhost:8083/api/v1/addProduct';
+const BUY_URL = 'http://localhost:8084/api/v1/productLookup';
 
 
 export default class CurdApi {

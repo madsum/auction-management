@@ -21,13 +21,10 @@ public class Product implements Serializable {
     @Id
     private String id;
     @NotEmpty(message = "name is mandatory")
-    private String name;
+    private String productName;
     @NotEmpty(message = "price is mandatory")
     private int price;
-    @Transient
-    private byte[] pictureByte;
-    @Transient
-    private MultipartFile file;
-    private String fileUrl;
+    @NotEmpty(message = "fileName is mandatory")
+    private String photoFileName;
     private String sellerName;
 }
