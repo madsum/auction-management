@@ -43,6 +43,7 @@ export class Buy extends Component {
                                         <Table.HeaderCell>Product Name</Table.HeaderCell>
                                     <Table.HeaderCell>Price</Table.HeaderCell>
                                     <Table.HeaderCell>Seller Name</Table.HeaderCell>
+                                    <Table.HeaderCell>Image</Table.HeaderCell>
                                     <Table.HeaderCell>Bid product</Table.HeaderCell>
                                 </Table.Row>
                             </Table.Header>
@@ -53,6 +54,7 @@ export class Buy extends Component {
                                             <Table.Cell>{product.productName}</Table.Cell>
                                             <Table.Cell>{product.price}</Table.Cell>
                                             <Table.Cell>{product.sellerName}</Table.Cell>
+                                            <Table.Cell><img id="ItemPreview" src={product.photoUrl} alt="product photo" width="50" height="50"/> </Table.Cell>
                                             <Table.Cell><Link to={{
                                                 pathname: "/bidProduct",
                                                 state: {

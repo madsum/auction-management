@@ -28,6 +28,9 @@ import java.util.UUID;
 @RestController
 @RequestMapping(path = "/api/v1/addProduct")
 public class NewProductController {
+
+    private final String PHOTO_URL = "http://localhost:8084/api/v1/productLookup/getImage?name=";
+
     private final CommandGateway commandGateway;
     private final AppProperty appProperty;
     private final RabbitTemplate template;
@@ -47,11 +50,11 @@ public class NewProductController {
     @PostMapping
     public ResponseEntity<NewProductResponse> addProduct(@Valid @ModelAttribute("product") ProductRequest productRequest) {
         MultipartFile file = productRequest.getFile();
-        final String absoluteUploadDir = System.getProperty("user.dir") + File.separator + Path.of(AppProperty.UPLOAD_DIR);
+        String absoluteUploadDir = System.getProperty("user.dir") + File.separator + Path.of(AppProperty.UPLOAD_DIR);
+        String photoUrl = PHOTO_URL+file.getOriginalFilename();
         Product product = new Product();
-        String filename = file.getOriginalFilename();
         product.setProductName(productRequest.getName());
-        product.setPhotoFileName(filename);
+        product.setPhotoUrl(photoUrl);
         product.setPrice(productRequest.getPrice());
         product.setSellerName(productRequest.getSellerName());
 

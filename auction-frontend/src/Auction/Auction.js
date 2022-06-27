@@ -41,7 +41,7 @@ export class Auction extends Component {
                       <Button variant="btn btn-info" onClick={() => this.props.history.push('/sell/',{logedUser: this.state.logedUser})}>Sell</Button>
                     </p>
                     <p>
-                      <Button variant="btn btn-info" onClick={() => this.props.history.push('/sell/',{logedUser: this.state.logedUser})}>Buy</Button>
+                      <Button variant="btn btn-info" onClick={() => this.props.history.push('/buy/',{logedUser: this.state.logedUser})}>Buy</Button>
                     </p>
                 </section>
         )}

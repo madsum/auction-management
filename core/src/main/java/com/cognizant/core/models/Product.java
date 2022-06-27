@@ -24,7 +24,6 @@ public class Product implements Serializable {
     private String productName;
     @NotEmpty(message = "price is mandatory")
     private int price;
-    @NotEmpty(message = "fileName is mandatory")
-    private String photoFileName;
+    private String photoUrl;
     private String sellerName;
 }

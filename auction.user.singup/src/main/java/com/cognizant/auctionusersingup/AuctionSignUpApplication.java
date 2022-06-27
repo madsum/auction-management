@@ -6,10 +6,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import com.cognizant.auctionusersingup.repository.UserDetailsRepository;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,7 +15,7 @@ import com.cognizant.auctionusersingup.entities.Authority;
 import com.cognizant.auctionusersingup.entities.User;
 
 @SpringBootApplication
-public class AuctionSingUpApplication {
+public class AuctionSignUpApplication {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -28,7 +24,7 @@ public class AuctionSingUpApplication {
 	private UserDetailsRepository userDetailsRepository;
 
 	public static void main(String[] args) {
-		SpringApplication.run(AuctionSingUpApplication.class, args);
+		SpringApplication.run(AuctionSignUpApplication.class, args);
 	}
 	
 	@PostConstruct

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios'
 import { Image,Container,Row,Col } from 'react-bootstrap'
-import { Button } from 'react-bootstrap';
-import history from '../history';
 
 export class Bid extends Component {
     constructor(props) {
@@ -40,7 +38,7 @@ export class Bid extends Component {
             </label>
             <label>
               Item picture:{' '} 
-              {$imagePreview}
+              <img id="ItemPreview" src={this.state.product.photoUrl} alt="product photo" width="150" height="200"/> 
             </label>
             
             <label>
