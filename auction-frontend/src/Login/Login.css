@@ -1,0 +1,5 @@
+.center {
+    max-width: max-content;
+    margin: auto;
+    background-image: linear-gradient(white, white);
+}

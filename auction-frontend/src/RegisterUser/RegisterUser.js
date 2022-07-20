@@ -3,6 +3,7 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from 'axios';
 import * as React from 'react';
+import './RegisterUser.css'
 
 const   FULL_NAME_REGX = /^[a-zA-Z0-9 ]+$/;
 const EMAIL_REGX = /^(?![\w\.@]*\.\.)(?![\w\.@]*\.@)(?![\w\.]*@\.)\w+[\w\.]*@[\w\.]+\.\w{2,}$/;
@@ -113,16 +114,16 @@ const RegisterUser = () => {
     }
 
     return (
-        <>
+        <div className="center">
             {success ? (
-                <section style={{background: "white"}}>
+                <section>
                     <h1>Success!</h1>
                     <p>
                         <a href="/signin">Sign In</a>
                     </p>
                 </section>
             ) : (
-                <section style={{background: "white"}}>
+                <section>
                     <p>
                         Already registered?<br />
                         <span className="line">
@@ -261,11 +262,11 @@ const RegisterUser = () => {
                         <p>Selected {role}!</p>
                       
 
-                        <button disabled={ !validEmail || !validFullName || !validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
+                        <button class="btn btn-primary" disabled={ !validEmail || !validFullName || !validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
                     </form>
                 </section>
             )}
-        </>
+        </div>
     )
 }
 

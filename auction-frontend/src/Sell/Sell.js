@@ -1,6 +1,7 @@
 
 import React, { Component } from "react";
 import CurdApi from "../Utility/CurdApi";
+import "./Sell.css"
 
 export class Sell extends Component {
     constructor(props) {
@@ -9,8 +10,7 @@ export class Sell extends Component {
             logedUser: props?.location?.state?.logedUser,
             name: '',
             price: 0,
-            file: '',
-            sellerName: props?.location?.state?.logedUser?.fullName
+            file: ''
         };
     
         this.handleChangeName = this.handleChangeName.bind(this);
@@ -39,7 +39,7 @@ export class Sell extends Component {
       } 
       async handleSubmit(event) {
         event.preventDefault();
-        let respose = await CurdApi.postProduct(this.state.name, this.state.price, this.state.file, this.state.sellerName);
+        let respose = await CurdApi.postProduct(this.state.name, this.state.price, this.state.file);
         if(respose?.data){
             this.clearState();
             event.target.reset();
@@ -50,7 +50,7 @@ export class Sell extends Component {
       render() {
         console.log(JSON.stringify(this.state.logedUser));
         return (
-          <div className="Home">
+          <div className="center">
             {this.state?.logedUser?.role !== "SELLER" ? (
             <section style={{background: "white"}}>
                 <h1>Only seller can access this seller page. Please sign in as a seller</h1>
@@ -73,11 +73,8 @@ export class Sell extends Component {
               <input type="file" file={this.state.file} onChange={this.handleChangeFile} 
               name="file" accept="image/apng, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/webp"></input>
             </label>
-            <label>
-              Seller name:{' '} {this.state.sellerName}
-            </label>
             
-            <input type="submit" value="Submit" />
+            <input  type="submit" value="Submit" />
           </form>
         )}
         </div> 

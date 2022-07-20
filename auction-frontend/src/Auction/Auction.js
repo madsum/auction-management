@@ -10,7 +10,7 @@ export class Auction extends Component {
           logedUser: props?.location?.state?.logedUser,
         };
         this.handleChange = this.handleChange.bind(this);
-      }
+          }
 
 
       handleChange(event) {
@@ -27,7 +27,7 @@ export class Auction extends Component {
 
     render() {
         return (
-            <div className="Home">
+            <div className="center">
               {this.state?.logedUser == null ? (
                 <section style={{background: "white"}}>
                     <h1>Please login first!</h1>
@@ -36,14 +36,17 @@ export class Auction extends Component {
                     </p>
                 </section>
             ) : (
-                <section style={{background: "white"}}>
-                    <p>
-                      <Button variant="btn btn-info" onClick={() => this.props.history.push('/sell/',{logedUser: this.state.logedUser})}>Sell</Button>
-                    </p>
-                    <p>
-                      <Button variant="btn btn-info" onClick={() => this.props.history.push('/buy/',{logedUser: this.state.logedUser})}>Buy</Button>
-                    </p>
-                </section>
+                <div style={{background: "white"}}>
+                    <h6>User name: {this.state?.logedUser.fullName}</h6>
+                    <h6>User role: {this.state?.logedUser.role}</h6>
+                    <label>Sell an item:{"  "}
+                      <Button variant="btn btn-primary" onClick={() => this.props.history.push('/sell/',{logedUser: this.state.logedUser})}>Sell</Button>
+                    </label>
+                    <p></p>
+                    <label>Buy an item:{"  "}
+                      <Button variant="btn btn-primary" onClick={() => this.props.history.push('/buy/',{logedUser: this.state.logedUser})}>Buy</Button>
+                    </label>
+                </div>
         )}
         </div>
     )}

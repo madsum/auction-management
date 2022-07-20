@@ -44,13 +44,6 @@ const Login = props => {
             setPwd('');
             setSuccess(true);
             props.history.push("/auction",{ logedUser: logedUser}); 
-          //  props.history.push("/auction",{ role: logedUser?.role}); 
-            /*
-            this.context.router.push({
-                pathname: '/auction',
-                state: {role: logedUser?.role}  
-            })
-            */
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
@@ -61,12 +54,12 @@ const Login = props => {
             } else {
                 setErrMsg('Login Failed');
             }
-            errRef.current.focus();
+          //  errRef.current.focus();
         }
     }
 
     return (
-        <>
+        <div className="center">
             {console.log("In the render success: "+JSON.stringify(success))}
             {success ? (
                 <section style={{background: "white"}}>
@@ -100,7 +93,8 @@ const Login = props => {
                             value={pwd}
                             required
                         />
-                        <button>Sign In</button>
+                        <label></label>    
+                        <button class="btn btn-primary">Sign In</button>
                     </form>
                     <p>
                         Need an Account?<br />
@@ -110,7 +104,7 @@ const Login = props => {
                     </p>
                 </section>
             )}
-        </>
+        </div>
     )
 };
 

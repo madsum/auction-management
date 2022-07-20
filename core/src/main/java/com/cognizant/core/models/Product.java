@@ -5,9 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
@@ -24,6 +22,6 @@ public class Product implements Serializable {
     private String productName;
     @NotEmpty(message = "price is mandatory")
     private int price;
+    private int bidPrice;
     private String photoUrl;
-    private String sellerName;
 }

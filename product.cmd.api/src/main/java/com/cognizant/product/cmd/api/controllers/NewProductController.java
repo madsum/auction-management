@@ -13,10 +13,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
@@ -26,7 +23,7 @@ import java.nio.file.Paths;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(path = "/api/v1/addProduct")
+@RequestMapping(path = "/api/v1")
 public class NewProductController {
 
     private final String PHOTO_URL = "http://localhost:8084/api/v1/productLookup/getImage?name=";
@@ -47,7 +44,7 @@ public class NewProductController {
         this.appProperty.init();
     }
 
-    @PostMapping
+    @PostMapping(path = "/addProduct")
     public ResponseEntity<NewProductResponse> addProduct(@Valid @ModelAttribute("product") ProductRequest productRequest) {
         MultipartFile file = productRequest.getFile();
         String absoluteUploadDir = System.getProperty("user.dir") + File.separator + Path.of(AppProperty.UPLOAD_DIR);
@@ -56,7 +53,6 @@ public class NewProductController {
         product.setProductName(productRequest.getName());
         product.setPhotoUrl(photoUrl);
         product.setPrice(productRequest.getPrice());
-        product.setSellerName(productRequest.getSellerName());
 
         byte[] fileByte = storageService.store(file, Paths.get(absoluteUploadDir));
         template.convertAndSend(appMessageQueueConfig.EXCHANGE,

@@ -40,9 +40,9 @@ export class Buy extends Component {
                         <Table style={{ width: "auto", tableLayout: "auto" }}>
                             <Table.Header>
                                 <Table.Row>
-                                        <Table.HeaderCell>Product Name</Table.HeaderCell>
+                                    <Table.HeaderCell>Product Name</Table.HeaderCell>
                                     <Table.HeaderCell>Price</Table.HeaderCell>
-                                    <Table.HeaderCell>Seller Name</Table.HeaderCell>
+                                    <Table.HeaderCell>Highest bid price</Table.HeaderCell>
                                     <Table.HeaderCell>Image</Table.HeaderCell>
                                     <Table.HeaderCell>Bid product</Table.HeaderCell>
                                 </Table.Row>
@@ -53,7 +53,7 @@ export class Buy extends Component {
                                         <Table.Row key={product.id}>
                                             <Table.Cell>{product.productName}</Table.Cell>
                                             <Table.Cell>{product.price}</Table.Cell>
-                                            <Table.Cell>{product.sellerName}</Table.Cell>
+                                            <Table.Cell>{product.bidPrice}</Table.Cell>
                                             <Table.Cell><img id="ItemPreview" src={product.photoUrl} alt="product photo" width="50" height="50"/> </Table.Cell>
                                             <Table.Cell><Link to={{
                                                 pathname: "/bidProduct",

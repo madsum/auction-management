@@ -22,6 +22,10 @@ public class ProductAggregate {
     private String id;
     private Product product;
 
+    public ProductAggregate(){
+
+    }
+
     @CommandHandler
     public ProductAggregate(NewProductCommand command) {
         var newProduct = command.getProduct();

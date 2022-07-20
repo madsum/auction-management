@@ -94,6 +94,9 @@ public class ProductLookupController {
     public @ResponseBody
     byte[] getImageWithMediaType(@RequestParam String name) throws IOException {
         final String absoluteUploadDir = System.getProperty("user.dir") + File.separator + Path.of(AppProperty.UPLOAD_DIR);
+        if(name.equalsIgnoreCase("undefined") || name == null){
+            return null;
+        }
         String fileUrl = absoluteUploadDir+ File.separator + name;
         InputStream in =  Files.newInputStream(Paths.get(fileUrl));
         return IOUtils.toByteArray(in);

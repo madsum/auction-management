@@ -33,10 +33,9 @@ public class AuctionSignUpApplication {
 		List<Authority> authorityList=new ArrayList<>();
 		
 		authorityList.add(createAuthority("BUYER"));
-/*		authorityList.add(createAuthority("SELLER"));
-		authorityList.add(createAuthority("ADMIN"));*/
-		
+
 		User user=new User();
+		user.setFullName("Admin");
 		user.setUserName("admin");
 		user.setPassword(passwordEncoder.encode("Admin786!"));
 		user.setEmail("admin@admin.com");
@@ -48,6 +47,7 @@ public class AuctionSignUpApplication {
 		authorityList.add(createAuthority("USER"));
 
 		User user2=new User();
+		user2.setFullName("Masum Islam");
 		user2.setUserName("madsum");
 		user2.setPassword(passwordEncoder.encode("Finbd786!"));
 		user2.setEmail("madsum@gmail.com");
