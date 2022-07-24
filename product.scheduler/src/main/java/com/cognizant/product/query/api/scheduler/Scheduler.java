@@ -5,8 +5,6 @@ import com.cognizant.product.query.api.config.PropertyLoader;
 import com.cognizant.product.query.api.service.ProductDbService;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -19,12 +17,12 @@ import java.util.Date;
 @Component
 //@EnableAsync
 @Log
-public class ParallelScheduler {
+public class Scheduler {
    private final ProductDbService productDbService;
     @Value("${scheduler_rate}")
    int schedulerRate;
 
-    public ParallelScheduler(ProductDbService productDbService) {
+    public Scheduler(ProductDbService productDbService) {
         this.productDbService = productDbService;
     }
 
