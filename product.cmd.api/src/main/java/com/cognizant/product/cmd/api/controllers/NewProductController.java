@@ -53,6 +53,10 @@ public class NewProductController {
         product.setProductName(productRequest.getName());
         product.setPhotoUrl(photoUrl);
         product.setPrice(productRequest.getPrice());
+        product.setAuctionEndTime(productRequest.getAuctionEndTime());
+        product.setBidderEmail(productRequest.getBidderEmail());
+        product.setBidPrice(productRequest.getBidPrice());
+        product.setSold(productRequest.isSold());
 
         byte[] fileByte = storageService.store(file, Paths.get(absoluteUploadDir));
         template.convertAndSend(appMessageQueueConfig.EXCHANGE,

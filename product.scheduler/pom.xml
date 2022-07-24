@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.cognizant</groupId>
-    <artifactId>product.query.api</artifactId>
+    <artifactId>product.scheduler</artifactId>
     <version>1.0.0</version>
-    <name>product.query.api</name>
-    <description>Product Query API Project</description>
+    <name>product.scheduler</name>
+    <description>Product scheduler Project</description>
 
     <properties>
         <java.version>15</java.version>

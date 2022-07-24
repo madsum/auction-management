@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.time.OffsetDateTime;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -24,4 +26,7 @@ public class Product implements Serializable {
     private int price;
     private int bidPrice;
     private String photoUrl;
+    private Date auctionEndTime;
+    private boolean isSold;
+    private String  bidderEmail;
 }

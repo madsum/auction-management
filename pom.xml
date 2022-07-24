@@ -25,6 +25,7 @@
 		<module>product.query.api</module>
 		<module>product.cmd.api</module>
 		<module>auction.user.singup</module>
+		<module>product.scheduler</module>
 	</modules>
 
 	<build>
