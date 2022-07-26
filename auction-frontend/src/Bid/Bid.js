@@ -40,11 +40,11 @@ export class Bid extends Component {
         event.preventDefault();
         console.log(this.state.product.id);
         if(this.state.bidPrice <= this.state.product.price){
-          alert("The bid price "+this.state.bidPrice +" must be greater than the product price "+this.state.product.price);
+          alert("The bid price "+this.state.bidPrice +" € must be greater than the product price "+this.state.product.price+" €");
           return;
         }
         if(this.state.bidPrice <= this.state.product.bidPrice){
-          alert("The bid price "+this.state.bidPrice +" must be greater than the highest bid price "+this.state.product.bidPrice);
+          alert("The bid price "+this.state.bidPrice +" € must be greater than the highest bid price "+this.state.product.bidPrice+" €");
           return;
         }
         let respose = await CurdApi.bidProduct(this.state.product, this.state.logedUser?.email, this.state.bidPrice);

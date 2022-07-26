@@ -72,7 +72,7 @@ export class Sell extends Component {
                 </p>
             </section>
         ) : (
-          <form onSubmit={this.handleSubmit}>
+          <form style={{width: "640px", height: "460px"}} onSubmit={this.handleSubmit}>
             <label>
               Item name:{' '}
               <input type="text" name={this.state.name} onChange={this.handleChangeName} />
@@ -95,7 +95,7 @@ export class Sell extends Component {
               />
             </label>
             
-            <input  type="submit" value="Submit" />
+            <input style={{width: "100px", height: "40px"}}  type="submit" value="Submit" />
           </form>
         )}
         </div> 

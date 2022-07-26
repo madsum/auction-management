@@ -53,8 +53,13 @@ public class Scheduler {
             msg.setFrom(new InternetAddress("madsum@gmail.com", false));
 
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(product.getBidderEmail()));
+<<<<<<< Updated upstream
             msg.setSubject("Congregation for winning the bid on "+product.getProductName());
             msg.setContent("Hi, \n Please pay "+product.getBidPrice(), "text/html");
+=======
+            msg.setSubject("Congratulation for winning the bid on "+product.getProductName());
+            msg.setContent("Hi,\n You have won the bid.\n Please pay "+product.getBidPrice(), "text/html");
+>>>>>>> Stashed changes
             msg.setSentDate(new Date());
 
             MimeBodyPart messageBodyPart = new MimeBodyPart();

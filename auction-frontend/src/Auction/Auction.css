@@ -1,10 +1,4 @@
-
-.Home .lander p {
-    color: rgb(179, 80, 174);
-}
-
 .center {
     max-width: max-content;
     margin: auto;
-    background-image: linear-gradient(white, white);
 }
