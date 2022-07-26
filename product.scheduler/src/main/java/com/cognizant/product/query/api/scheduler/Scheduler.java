@@ -32,35 +32,33 @@ public class Scheduler {
         log.info("ScheduleCall on every "+schedulerRate/1000+" seconds");
         var result = productDbService.findBySold();
         result.forEach(product -> {
-            if(product.getAuctionEndTime().getTime() < System.currentTimeMillis()){
-                product.setSold(true);
-                productDbService.updateProduct(product);
-                try {
-                    sendmail(product);
-                } catch (MessagingException e) {
-                    log.warning("Failed to send email "+e.getMessage());
+            System.out.println("stop");
+            if( (product.getAuctionEndTime() != null && (product.getAuctionEndTime().getTime() > System.currentTimeMillis())) ){
+                if(sendmail(product)){
+                    product.setSold(true);
+                    productDbService.updateProduct(product);
                 }
-
             }
-
         });
     }
-    public void sendmail(Product product) throws MessagingException {
+    public boolean sendmail(Product product){
+        boolean emailSuccessful = false;
         Session session = Session.getInstance(PropertyLoader.getProperty(), new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(PropertyLoader.getPropertyByKey(PropertyLoader.USER_NAME_KEY), PropertyLoader.getPropertyByKey(PropertyLoader.USER_PASSWORD_KEY));
             }
         });
-        Message msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress("madsum@gmail.com", false));
+        try {
+            Message msg = new MimeMessage(session);
+            msg.setFrom(new InternetAddress("madsum@gmail.com", false));
 
-        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(product.getBidderEmail()));
-        msg.setSubject("Congregation for winning the bid on "+product.getProductName());
-        msg.setContent("Hi, \n Please pay "+product.getBidPrice(), "text/html");
-        msg.setSentDate(new Date());
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(product.getBidderEmail()));
+            msg.setSubject("Congregation for winning the bid on "+product.getProductName());
+            msg.setContent("Hi, \n Please pay "+product.getBidPrice(), "text/html");
+            msg.setSentDate(new Date());
 
-        MimeBodyPart messageBodyPart = new MimeBodyPart();
-        messageBodyPart.setContent("Tutorials point email", "text/html");
+            MimeBodyPart messageBodyPart = new MimeBodyPart();
+            messageBodyPart.setContent("Tutorials point email", "text/html");
 
 /*        Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(messageBodyPart);
@@ -69,6 +67,12 @@ public class Scheduler {
         attachPart.attachFile("/var/tmp/image19.png");
         multipart.addBodyPart(attachPart);
         msg.setContent(multipart);*/
-        Transport.send(msg);
-    }
+            Transport.send(msg);
+            emailSuccessful = true;
+        }catch (MessagingException e){
+            log.warning("Failed to send email: "+e.getMessage());
+        }
+        return emailSuccessful;
+        }
+
 }

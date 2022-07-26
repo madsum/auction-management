@@ -8,6 +8,7 @@ export class Buy extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            logedUser: props?.location?.state?.logedUser,
             productState: []
         }
     }
@@ -44,25 +45,33 @@ export class Buy extends Component {
                                     <Table.HeaderCell>Price</Table.HeaderCell>
                                     <Table.HeaderCell>Highest bid price</Table.HeaderCell>
                                     <Table.HeaderCell>Image</Table.HeaderCell>
+                                    <Table.HeaderCell>End Time</Table.HeaderCell>
                                     <Table.HeaderCell>Bid product</Table.HeaderCell>
                                 </Table.Row>
                             </Table.Header>
                             <Table.Body>
                                 {this.state.productState.map((product) => {
+
                                     return (
                                         <Table.Row key={product.id}>
                                             <Table.Cell>{product.productName}</Table.Cell>
                                             <Table.Cell>{product.price}</Table.Cell>
                                             <Table.Cell>{product.bidPrice}</Table.Cell>
                                             <Table.Cell><img id="ItemPreview" src={product.photoUrl} alt="product photo" width="50" height="50"/> </Table.Cell>
+                                            <Table.Cell>{product.strAuctionEndTime}</Table.Cell>
+                                            { product.sold === false ? 
                                             <Table.Cell><Link to={{
                                                 pathname: "/bidProduct",
                                                 state: {
-                                                    title: "Bid product",
+                                                    logedUser: this.state.logedUser,
                                                     product: product
                                                 }
                                             }} >Bid product</Link>
-                                            </Table.Cell>
+                                            </Table.Cell> : ""
+                                            
+                                            
+                                            }
+
                                         </Table.Row>
                                     );
                                 })

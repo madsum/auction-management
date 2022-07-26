@@ -25,7 +25,7 @@ public class UpdateProductController {
                                                    @Valid  @RequestBody UpdateProductCommand command) {
         try {
             command.setId(id);
-            commandGateway.send(command);
+            commandGateway.sendAndWait(command);
             return new ResponseEntity<>(new BaseResponse("Product successfully updated!"), HttpStatus.OK);
         } catch (Exception e) {
             var safeErrorMessage = "Error while processing update product request for id - " + id;

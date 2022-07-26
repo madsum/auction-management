@@ -1,6 +1,8 @@
 
 import React, { Component } from "react";
 import CurdApi from "../Utility/CurdApi";
+import DateTimePicker from 'react-datetime-picker'; 
+import moment from 'moment';
 import "./Sell.css"
 
 export class Sell extends Component {
@@ -10,13 +12,15 @@ export class Sell extends Component {
             logedUser: props?.location?.state?.logedUser,
             name: '',
             price: 0,
-            file: ''
+            file: '',
+            endDate: new Date()
         };
     
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangeNumber = this.handleChangeNumber.bind(this);
         this.handleChangeFile = this.handleChangeFile.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onEndDateChange = this.onEndDateChange.bind(this);
       }
     
       handleChangeName(event) {
@@ -31,15 +35,24 @@ export class Sell extends Component {
         this.setState({file: event.target.files[0]});
       }
 
+      onEndDateChange = endDate => {
+        this.setState({ endDate });
+      };  
+/*
+      onEndDateChange = value => {
+        this.setState({ value });
+      };  
+*/
       clearState(){ 
         // clear state 
         this.setState({name : ''}) 
         this.setState({price : ''}) 
         this.setState({file : ''}) 
+        this.setState({value : ''}) 
       } 
       async handleSubmit(event) {
         event.preventDefault();
-        let respose = await CurdApi.postProduct(this.state.name, this.state.price, this.state.file);
+        let respose = await CurdApi.postProduct(this.state.name, this.state.price, this.state.file, this.state.endDate);
         if(respose?.data){
             this.clearState();
             event.target.reset();
@@ -72,6 +85,14 @@ export class Sell extends Component {
               Item picture:{' '}
               <input type="file" file={this.state.file} onChange={this.handleChangeFile} 
               name="file" accept="image/apng, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/webp"></input>
+            </label>
+            <label>
+              Auction end time:{' '}
+              <DateTimePicker
+              minDate={moment().toDate()}
+              format="dd/MM/y h:mm:ss a"
+              value={this.state.endDate} onChange={this.onEndDateChange}
+              />
             </label>
             
             <input  type="submit" value="Submit" />

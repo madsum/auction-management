@@ -9,6 +9,7 @@ export class Bid extends Component {
         super(props);
         this.state = {
             product: props?.location?.state?.product,
+            logedUser: props?.location?.state?.logedUser,
             photo: '',
             imagePreviewUrl: '',
             bidPrice: 0
@@ -46,7 +47,7 @@ export class Bid extends Component {
           alert("The bid price "+this.state.bidPrice +" must be greater than the highest bid price "+this.state.product.bidPrice);
           return;
         }
-        let respose = await CurdApi.bidProduct(this.state.product, this.state.bidPrice);
+        let respose = await CurdApi.bidProduct(this.state.product, this.state.logedUser?.email, this.state.bidPrice);
         if(respose?.data){
             this.clearState();
             event.target.reset();
@@ -74,6 +75,9 @@ export class Bid extends Component {
             </label>
             <label>
               Highest bid price:{' '} {this.state.product.bidPrice}
+            </label>
+            <label>
+              Bid ends at:{' '} {this.state.product.strAuctionEndTime}
             </label>
             <label>
               Item picture:{' '} 

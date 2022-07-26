@@ -40,7 +40,7 @@ public class ProductAggregate {
     }
 
     @CommandHandler
-    public void handle(UpdateProductCommand command) {
+    public ProductAggregate(UpdateProductCommand command) {
         var updatedProduct = command.getProduct();
         updatedProduct.setId(command.getId());
 

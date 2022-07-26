@@ -6,12 +6,13 @@ const BUY_URL = 'http://localhost:8084/api/v1/productLookup';
 
 
 export default class CurdApi {
-  static async postProduct(name, price, file) {
+  static async postProduct(name, price, file, endDate) {
     try {
       let product = new FormData();    
       product.append("name", name);
       product.append("price", price);
       product.append("file", file);
+      product.append("auctionEndTime", endDate);
       
       const response = await axios.post(SELL_URL, product , {
           headers: {
@@ -24,7 +25,7 @@ export default class CurdApi {
   }
 }
 
-static async bidProduct(product, bidPrice) {  
+static async bidProduct(product, email, bidPrice) {  
     try {
       let updateProduct= {
         "product": {
@@ -32,7 +33,9 @@ static async bidProduct(product, bidPrice) {
           "productName": product.productName,
           "price": product.price,
           "photoUrl": product.photoUrl,
-          "bidPrice": bidPrice
+          "bidPrice": bidPrice,
+          "auctionEndTime": product.auctionEndTime,
+          "bidderEmail": email
         }
       }
       const response = await axios.put(BID_URL+product.id, updateProduct, {

@@ -22,6 +22,8 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @RestController
@@ -46,6 +48,12 @@ public class ProductLookupController {
             if (response == null || response.getProducts() == null) {
                 throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No product found", null);
             }
+            response.getProducts().forEach(product -> {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+                if(product.getAuctionEndTime() != null){
+                    product.setStrAuctionEndTime(dateFormat.format(product.getAuctionEndTime()));
+                }
+            });
             return response.getProducts();
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Failed to complete get all product request", e);
