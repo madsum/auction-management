@@ -1,6 +1,7 @@
 package com.cognizant.product.cmd.api.controllers;
 
 import com.cognizant.core.dto.BaseResponse;
+import com.cognizant.product.cmd.api.service.ProductDbService;
 import com.cognizant.product.cmd.api.commands.UpdateProductCommand;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +15,21 @@ import javax.validation.Valid;
 @RequestMapping(path = "/api/v1/updateProduct")
 public class UpdateProductController {
     private final CommandGateway commandGateway;
+    private final ProductDbService productDbService;
 
     @Autowired
-    public UpdateProductController(CommandGateway commandGateway) {
+    public UpdateProductController(CommandGateway commandGateway, ProductDbService productDbService) {
         this.commandGateway = commandGateway;
+        this.productDbService = productDbService;
     }
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<BaseResponse> updateUser(@PathVariable(value = "id") String id,
                                                    @Valid  @RequestBody UpdateProductCommand command) {
         try {
-            command.setId(id);
-            commandGateway.sendAndWait(command);
+           // command.setId(id);
+           // commandGateway.sendAndWait(command);
+            productDbService.updateProduct(command.getProduct());
             return new ResponseEntity<>(new BaseResponse("Product successfully updated!"), HttpStatus.OK);
         } catch (Exception e) {
             var safeErrorMessage = "Error while processing update product request for id - " + id;

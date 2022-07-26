@@ -57,6 +57,7 @@ public class Scheduler {
             msg.setContent("Hi, \n Please pay "+product.getBidPrice(), "text/html");
             msg.setSubject("Congratulation for winning the bid on "+product.getProductName());
             msg.setContent("Hi,\n You have won the bid.\n Please pay "+product.getBidPrice(), "text/html");
+
             msg.setSentDate(new Date());
 /*
             MimeBodyPart messageBodyPart = new MimeBodyPart();
