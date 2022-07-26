@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import CurdApi from "../Utility/CurdApi";
 import DateTimePicker from 'react-datetime-picker'; 
 import moment from 'moment';
-import "./Sell.css"
+
 
 export class Sell extends Component {
     constructor(props) {

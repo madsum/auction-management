@@ -29,14 +29,14 @@ export class Auction extends Component {
         return (
             <div className="center">
               {this.state?.logedUser == null ? (
-                <section style={{background: "white"}}>
+                <section>
                     <h1>Please login first!</h1>
                     <p>
                         <a href="/signin">Sign In</a>
                     </p>
                 </section>
             ) : (
-                <div style={{background: "white"}}>
+                <div>
                     <h6>User name: {this.state?.logedUser.fullName}</h6>
                     <h6>User role: {this.state?.logedUser.role}</h6>
                     <label>Sell an item:{"  "}

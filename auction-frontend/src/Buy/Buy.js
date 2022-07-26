@@ -35,7 +35,7 @@ export class Buy extends Component {
     render() { 
 
         return (
-            <div>
+            <div className="center">
                 {
                     Array.isArray(this.state.productState) ?
                         <Table style={{ width: "auto", tableLayout: "auto" }}>

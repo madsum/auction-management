@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
-
 import axios from 'axios';
+import "./Login.css"
 const LOGIN_URL = 'http://localhost:8085/api/v1/auth/login';
 
 const Login = props => {
@@ -62,7 +62,7 @@ const Login = props => {
         <div className="center">
             {console.log("In the render success: "+JSON.stringify(success))}
             {success ? (
-                <section style={{background: "white"}}>
+                <section>
                     <h1>You are logged in!</h1>
                     <br />
                     <p>
@@ -70,7 +70,7 @@ const Login = props => {
                     </p>
                 </section>
             ) : (
-                <section style={{background: "white"}}>
+                <section>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Sign In</h1>
                     <form onSubmit={handleSubmit}>
