@@ -18,6 +18,7 @@ const Navigation = () => {
               <Nav.Link href="/">Register user</Nav.Link>
               <Nav.Link href="/signin">Sign In</Nav.Link>
               <Nav.Link href="/auction">Auction</Nav.Link>
+              <Nav.Link href="/sell">Sell</Nav.Link>
               <Nav.Link href="/buy">Buy</Nav.Link>
              </Nav>
           </Navbar.Collapse>

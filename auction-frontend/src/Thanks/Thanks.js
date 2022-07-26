@@ -4,7 +4,7 @@ class Thanks extends Component {
   render() {
     return (
       <div>
-        <h1>Thanks for your bid. It is successfully added!</h1>
+        <h2>Thanks for the bid. You will be notified by email if you win this bid.</h2>
       </div>
     );
   }

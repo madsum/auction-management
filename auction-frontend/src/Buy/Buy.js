@@ -60,6 +60,7 @@ export class Buy extends Component {
                                             <Table.Cell><img id="ItemPreview" src={product.photoUrl} alt="product photo" width="50" height="50"/> </Table.Cell>
                                             <Table.Cell>{product.strAuctionEndTime}</Table.Cell>
                                             { product.sold === false ? 
+                                            
                                             <Table.Cell><Link to={{
                                                 pathname: "/bidProduct",
                                                 state: {
@@ -67,11 +68,9 @@ export class Buy extends Component {
                                                     product: product
                                                 }
                                             }} >Bid product</Link>
-                                            </Table.Cell> : ""
-                                            
-                                            
+                                            </Table.Cell>
+                                             : <Table.Cell>Item sold</Table.Cell>
                                             }
-
                                         </Table.Row>
                                     );
                                 })
