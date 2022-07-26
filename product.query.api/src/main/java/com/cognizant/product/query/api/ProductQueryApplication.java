@@ -6,7 +6,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
-//@EnableScheduling
 @SpringBootApplication
 @Import({ AxonConfig.class,  AppMessageQueueConfig.class })
 public class ProductQueryApplication {
