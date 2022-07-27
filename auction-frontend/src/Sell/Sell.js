@@ -65,8 +65,8 @@ export class Sell extends Component {
         return (
           <div className="center">
             {this.state?.logedUser?.role !== "SELLER" ? (
-            <section style={{background: "white"}}>
-                <h1>Only seller can access this seller page. Please sign in as a seller</h1>
+            <section>
+                <h2>Only seller can access this seller page. Please sign in as a seller</h2>
                 <p>
                     <a href="/signin">Sign In</a>
                 </p>

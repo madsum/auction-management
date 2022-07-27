@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import CurdApi from '../Utility/CurdApi';
 import { Table, TableCell } from "semantic-ui-react";
 import 'semantic-ui-css/semantic.min.css';
-import './Buy.css';
 
 export class Buy extends Component {
     constructor(props) {

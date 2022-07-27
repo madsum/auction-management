@@ -33,7 +33,7 @@ public class Scheduler {
         var result = productDbService.findBySold();
         result.forEach(product -> {
             System.out.println("stop");
-            if( (product.getAuctionEndTime() != null && (product.getAuctionEndTime().getTime() > System.currentTimeMillis())) ){
+            if( (product.getAuctionEndTime() != null && (product.getAuctionEndTime().getTime() < System.currentTimeMillis())) ){
                 if(sendmail(product)){
                     product.setSold(true);
                     productDbService.updateProduct(product);
@@ -53,25 +53,22 @@ public class Scheduler {
             msg.setFrom(new InternetAddress("madsum@gmail.com", false));
 
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(product.getBidderEmail()));
-<<<<<<< Updated upstream
             msg.setSubject("Congregation for winning the bid on "+product.getProductName());
             msg.setContent("Hi, \n Please pay "+product.getBidPrice(), "text/html");
-=======
             msg.setSubject("Congratulation for winning the bid on "+product.getProductName());
             msg.setContent("Hi,\n You have won the bid.\n Please pay "+product.getBidPrice(), "text/html");
->>>>>>> Stashed changes
             msg.setSentDate(new Date());
-
+/*
             MimeBodyPart messageBodyPart = new MimeBodyPart();
             messageBodyPart.setContent("Tutorials point email", "text/html");
 
-/*        Multipart multipart = new MimeMultipart();
-        multipart.addBodyPart(messageBodyPart);
-        MimeBodyPart attachPart = new MimeBodyPart();
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(messageBodyPart);
+            MimeBodyPart attachPart = new MimeBodyPart();
 
-        attachPart.attachFile("/var/tmp/image19.png");
-        multipart.addBodyPart(attachPart);
-        msg.setContent(multipart);*/
+            attachPart.attachFile("/var/tmp/image19.png");
+            multipart.addBodyPart(attachPart);
+            msg.setContent(multipart);*/
             Transport.send(msg);
             emailSuccessful = true;
         }catch (MessagingException e){
