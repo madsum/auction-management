@@ -10,17 +10,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.Locale;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder    
+@Builder
 @Document(collection = "products")
 public class Product implements Serializable {
 

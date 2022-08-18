@@ -4,7 +4,6 @@ import com.cognizant.core.models.Product;
 import com.cognizant.core.product.events.NewProductEvent;
 import com.cognizant.core.product.events.ProductRemovedEvent;
 import com.cognizant.core.product.events.ProductUpdatedEvent;
-import com.cognizant.core.user.events.UserRemovedEvent;
 import com.cognizant.product.cmd.api.commands.NewProductCommand;
 import com.cognizant.product.cmd.api.commands.RemoveProductCommand;
 import com.cognizant.product.cmd.api.commands.UpdateProductCommand;
@@ -71,8 +70,4 @@ public class ProductAggregate {
         this.product = event.getProduct();
     }
 
-    @EventSourcingHandler
-    public void on(UserRemovedEvent event) {
-        AggregateLifecycle.markDeleted();
-    }
 }

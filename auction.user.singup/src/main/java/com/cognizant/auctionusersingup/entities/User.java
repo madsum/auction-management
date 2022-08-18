@@ -1,48 +1,49 @@
 package com.cognizant.auctionusersingup.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.List;
 
-@Table(name = "USER")
-@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+
+@Document(collection = "USER")
 public class User implements UserDetails {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private String id;
 
 	@NotEmpty(message = "userName name is mandatory")
-	@Column(name = "USER_NAME", unique = true)
 	private String userName;
 
 	@Size(min = 8, message = "password must have a minimum of 8 characters")
-	@Column(name = "PASSWORD", unique = true)
 	private String password;
 
 	@NotEmpty(message = "fullN name is mandatory")
-	@Column(name = "full_name")
 	private String fullName;
 
 	@NotEmpty(message = "email is mandatory")
 	@Email(message = "please provide a valid email address")
-	@Column(name = "email")
 	private String email;
-
-	@Column(name = "enabled")
 	private boolean enabled=true;
 
-	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	@JoinTable(name = "AUTH_USER_ID_TABLE", joinColumns = @JoinColumn(referencedColumnName = "id"),inverseJoinColumns = @JoinColumn(referencedColumnName ="id"))
+	//@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	//@JoinTable(name = "AUTH_USER_ID_TABLE", joinColumns = @JoinColumn(referencedColumnName = "id"),inverseJoinColumns = @JoinColumn(referencedColumnName ="id"))
 	private List<Authority> authorities;
 
-	@Column(name = "role")
 	public String role;
 
 	@Override
@@ -80,11 +81,11 @@ public class User implements UserDetails {
 		return this.enabled;
 	}
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
