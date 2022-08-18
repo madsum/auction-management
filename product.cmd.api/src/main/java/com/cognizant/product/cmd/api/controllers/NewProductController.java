@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.UUID;
 
 @RestController
@@ -52,6 +53,8 @@ public class NewProductController {
         product.setBidderEmail(productRequest.getBidderEmail());
         product.setBidPrice(productRequest.getBidPrice());
         product.setSold(productRequest.isSold());
+
+        storageService.store(file, Paths.get(absoluteUploadDir));
 
         NewProductCommand command = NewProductCommand.builder()
                 .product(product)

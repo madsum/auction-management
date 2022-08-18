@@ -51,14 +51,20 @@ public class Scheduler {
         try {
             Message msg = new MimeMessage(session);
             msg.setFrom(new InternetAddress("madsum@gmail.com", false));
+            if(product.getBidderEmail() != null && product.getProductName() != null ){
+                msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(product.getBidderEmail()));
+                msg.setSubject("Congregation for winning the bid on "+product.getProductName());
+                msg.setContent("Hi, \n Please pay "+product.getBidPrice(), "text/html");
+                msg.setSubject("Congratulation for winning the bid on "+product.getProductName());
+                msg.setContent("Hi,\n You have won the bid.\n Please pay "+product.getBidPrice(), "text/html");
 
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(product.getBidderEmail()));
-            msg.setSubject("Congregation for winning the bid on "+product.getProductName());
-            msg.setContent("Hi, \n Please pay "+product.getBidPrice(), "text/html");
-            msg.setSubject("Congratulation for winning the bid on "+product.getProductName());
-            msg.setContent("Hi,\n You have won the bid.\n Please pay "+product.getBidPrice(), "text/html");
+                msg.setSentDate(new Date());
+                Transport.send(msg);
+                emailSuccessful = true;
+            }else{
+                return emailSuccessful;
+            }
 
-            msg.setSentDate(new Date());
 /*
             MimeBodyPart messageBodyPart = new MimeBodyPart();
             messageBodyPart.setContent("Tutorials point email", "text/html");
@@ -70,8 +76,7 @@ public class Scheduler {
             attachPart.attachFile("/var/tmp/image19.png");
             multipart.addBodyPart(attachPart);
             msg.setContent(multipart);*/
-            Transport.send(msg);
-            emailSuccessful = true;
+
         }catch (MessagingException e){
             log.warning("Failed to send email: "+e.getMessage());
         }
