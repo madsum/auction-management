@@ -1,6 +1,5 @@
 package com.cognizant.product.cmd.api.controllers;
 
-import com.cognizant.core.configuration.AppMessageQueueConfig;
 import com.cognizant.core.models.Product;
 import com.cognizant.core.models.ProductRequest;
 import com.cognizant.product.cmd.api.commands.NewProductCommand;
@@ -8,7 +7,6 @@ import com.cognizant.product.cmd.api.config.AppProperty;
 import com.cognizant.product.cmd.api.dto.NewProductResponse;
 import com.cognizant.product.cmd.api.service.StorageService;
 import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,14 +29,12 @@ public class NewProductController {
 
     private final CommandGateway commandGateway;
     private final AppProperty appProperty;
-    private final RabbitTemplate template;
     private final StorageService storageService;
 
     @Autowired
-    public NewProductController(CommandGateway commandGateway, AppProperty appProperty, RabbitTemplate template, StorageService storageService) {
+    public NewProductController(CommandGateway commandGateway, AppProperty appProperty, StorageService storageService) {
         this.commandGateway = commandGateway;
         this.appProperty = appProperty;
-        this.template = template;
         this.storageService = storageService;
         this.appProperty.init();
     }
