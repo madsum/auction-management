@@ -3569,6 +3569,11 @@
   "resolved" "https://registry.npmjs.org/constants-browserify/-/constants-browserify-1.0.0.tgz"
   "version" "1.0.0"
 
+"constructs@^10.1.82":
+  "integrity" "sha512-sQL/bCwiWvx9din24ThnqJyiGmicNPywvVFEjGOz+bVnyc7/C8rKLVXLbyFebeVcKrcj2foBECeocltp8824LA=="
+  "resolved" "https://registry.npmjs.org/constructs/-/constructs-10.1.82.tgz"
+  "version" "10.1.82"
+
 "contains-path@^0.1.0":
   "integrity" "sha1-/ozxhP9mcLa67wGp1IYaXL7EEgo="
   "resolved" "https://registry.npmjs.org/contains-path/-/contains-path-0.1.0.tgz"
