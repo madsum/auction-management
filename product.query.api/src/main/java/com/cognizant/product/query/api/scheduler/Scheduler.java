@@ -41,7 +41,7 @@ public class Scheduler {
     }
     public boolean sendmail(Product product){
         boolean emailSuccessful = false;
-        Session session = Session.getInstance(PropertyLoader.getProperty(), new javax.mail.Authenticator() {
+        Session session = Session.getInstance(PropertyLoader.getProperty(), new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(PropertyLoader.getPropertyByKey(PropertyLoader.USER_NAME_KEY), PropertyLoader.getPropertyByKey(PropertyLoader.USER_PASSWORD_KEY));
             }

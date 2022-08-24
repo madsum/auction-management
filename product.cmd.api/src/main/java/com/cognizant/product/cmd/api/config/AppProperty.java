@@ -1,6 +1,5 @@
 package com.cognizant.product.cmd.api.config;
 
-import com.cognizant.core.configuration.AppMessageQueueConfig;
 import com.cognizant.product.cmd.api.exceptoins.StorageException;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -45,8 +44,4 @@ public class AppProperty {
         return resolver;
     }
 
-    @Bean
-    public AppMessageQueueConfig mQSellerConfig(){
-        return new AppMessageQueueConfig();
-    }
 }

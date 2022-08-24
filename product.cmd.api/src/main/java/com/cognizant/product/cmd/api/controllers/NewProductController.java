@@ -1,6 +1,5 @@
 package com.cognizant.product.cmd.api.controllers;
 
-import com.cognizant.core.configuration.AppMessageQueueConfig;
 import com.cognizant.core.models.Product;
 import com.cognizant.core.models.ProductRequest;
 import com.cognizant.product.cmd.api.commands.NewProductCommand;
