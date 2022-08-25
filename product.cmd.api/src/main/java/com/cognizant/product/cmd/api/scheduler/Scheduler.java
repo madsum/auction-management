@@ -70,6 +70,7 @@ public class Scheduler {
             msg.setContent(multipart);*/
             Transport.send(msg);
             emailSuccessful = true;
+            log.info("Email sent to: "+product.getBidderEmail());
         }catch (MessagingException e){
             log.warning("Failed to send email: "+e.getMessage());
         }
