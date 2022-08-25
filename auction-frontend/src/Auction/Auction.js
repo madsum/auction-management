@@ -18,12 +18,6 @@ export class Auction extends Component {
         console.log('role: '+this.state.role);
       }
 
-      handleKeyDown = (e) => {
-        if (e.key === 'Enter') {
-          this.setState({playerName: e.target.value});
-          history.push('/Game/'+this.state.playerName)
-        }
-      }
 
     render() {
         return (
