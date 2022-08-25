@@ -1,9 +1,9 @@
-package com.cognizant.product.query.api.controllers;
+package com.cognizant.product.cmd.api.controllers;
 
-import com.cognizant.product.query.api.config.AppProperty;
-import com.cognizant.product.query.api.dto.ProductLookupResponse;
-import com.cognizant.product.query.api.models.Product;
-import com.cognizant.product.query.api.repositories.ProductRepository;
+import com.cognizant.product.cmd.api.config.AppProperty;
+import com.cognizant.product.cmd.api.dto.ProductLookupResponse;
+import com.cognizant.product.cmd.api.models.Product;
+import com.cognizant.product.cmd.api.repositories.ProductRepository;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +31,7 @@ public class ProductLookupController {
     private final ProductRepository productRepository;
 
     @Autowired
-    public ProductLookupController( AppProperty appProperty, ProductRepository productRepository) {
+    public ProductLookupController(AppProperty appProperty, ProductRepository productRepository) {
        // this.queryGateway = queryGateway;
         this.appProperty = appProperty;
         this.productRepository = productRepository;

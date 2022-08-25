@@ -1,13 +1,11 @@
 package com.cognizant.product.cmd.api.controllers;
 
-import com.cognizant.core.models.Product;
-import com.cognizant.core.models.ProductRequest;
-import com.cognizant.product.cmd.api.commands.NewProductCommand;
 import com.cognizant.product.cmd.api.config.AppProperty;
 import com.cognizant.product.cmd.api.dto.NewProductResponse;
+import com.cognizant.product.cmd.api.models.Product;
+import com.cognizant.product.cmd.api.models.ProductRequest;
+import com.cognizant.product.cmd.api.repositories.ProductRepository;
 import com.cognizant.product.cmd.api.service.StorageService;
-import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.UUID;
 
 @RestController
@@ -27,18 +26,16 @@ import java.util.UUID;
 public class NewProductController {
 
     private final String PHOTO_URL = "http://localhost:8084/api/v1/productLookup/getImage?name=";
-
-    private final CommandGateway commandGateway;
     private final AppProperty appProperty;
-    private final RabbitTemplate template;
     private final StorageService storageService;
 
+    private final ProductRepository productRepository;
+
     @Autowired
-    public NewProductController(CommandGateway commandGateway, AppProperty appProperty, RabbitTemplate template, StorageService storageService) {
-        this.commandGateway = commandGateway;
+    public NewProductController(AppProperty appProperty, StorageService storageService, ProductRepository productRepository) {
         this.appProperty = appProperty;
-        this.template = template;
         this.storageService = storageService;
+        this.productRepository = productRepository;
         this.appProperty.init();
     }
 
@@ -56,14 +53,14 @@ public class NewProductController {
         product.setBidPrice(productRequest.getBidPrice());
         product.setSold(productRequest.isSold());
 
-        NewProductCommand command = NewProductCommand.builder()
-                .product(product)
-                .build();
+        storageService.store(file, Paths.get(absoluteUploadDir));
+
         var id = UUID.randomUUID().toString();
-        command.setId(id);
+
+        productRepository.save(product);
+
 
         try {
-            commandGateway.sendAndWait(command);
             return new ResponseEntity<>(new NewProductResponse(id, "Product successfully registered!"), HttpStatus.CREATED);
         } catch (Exception e) {
             var safeErrorMessage = "Error while processing new product request for id - " + id;

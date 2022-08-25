@@ -1,32 +1,28 @@
-package com.cognizant.core.models;
+package com.cognizant.product.query.api.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.Locale;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder    
-@Document(collection = "products")
+@Table(name = "products")
+@Entity
 public class Product implements Serializable {
 
     private final static String DATE_PATTERN = "EEE MMM d yyyy HH:mm:ss 'GMT'XX (zzzz)";
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     @NotEmpty(message = "name is mandatory")
     private String productName;

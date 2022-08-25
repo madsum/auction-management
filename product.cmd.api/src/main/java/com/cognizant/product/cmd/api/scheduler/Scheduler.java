@@ -1,8 +1,8 @@
-package com.cognizant.product.query.api.scheduler;
+package com.cognizant.product.cmd.api.scheduler;
 
-import com.cognizant.product.query.api.config.PropertyLoader;
-import com.cognizant.product.query.api.models.Product;
-import com.cognizant.product.query.api.service.ProductDbService;
+import com.cognizant.product.cmd.api.config.PropertyLoader;
+import com.cognizant.product.cmd.api.models.Product;
+import com.cognizant.product.cmd.api.service.ProductDbService;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.net.Authenticator;
 import java.util.Date;
 
 @Component
@@ -42,9 +43,9 @@ public class Scheduler {
     public boolean sendmail(Product product){
         boolean emailSuccessful = false;
         Session session = Session.getInstance(PropertyLoader.getProperty(), new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(PropertyLoader.getPropertyByKey(PropertyLoader.USER_NAME_KEY), PropertyLoader.getPropertyByKey(PropertyLoader.USER_PASSWORD_KEY));
-            }
+                protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(PropertyLoader.getPropertyByKey(PropertyLoader.USER_NAME_KEY), PropertyLoader.getPropertyByKey(PropertyLoader.USER_PASSWORD_KEY));
+                }
         });
         try {
             Message msg = new MimeMessage(session);

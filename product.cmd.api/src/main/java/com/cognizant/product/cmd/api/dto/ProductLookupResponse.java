@@ -1,8 +1,8 @@
-package com.cognizant.product.query.api.dto;
+package com.cognizant.product.cmd.api.dto;
 
 
 import com.cognizant.core.dto.BaseResponse;
-import com.cognizant.product.query.api.models.Product;
+import com.cognizant.product.cmd.api.models.Product;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
-package com.cognizant.product.query.api.service;
+package com.cognizant.product.cmd.api.service;
 
-import com.cognizant.product.query.api.models.Product;
-import com.cognizant.product.query.api.repositories.ProductRepository;
+import com.cognizant.product.cmd.api.models.Product;
+import com.cognizant.product.cmd.api.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

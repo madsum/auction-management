@@ -1,7 +1,7 @@
 package com.cognizant.product.query.api.scheduler;
 
-import com.cognizant.core.models.Product;
 import com.cognizant.product.query.api.config.PropertyLoader;
+import com.cognizant.product.query.api.models.Product;
 import com.cognizant.product.query.api.service.ProductDbService;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Value;

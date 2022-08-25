@@ -1,4 +1,4 @@
-package com.cognizant.core.models;
+package com.cognizant.product.query.api.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,9 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;

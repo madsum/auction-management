@@ -41,10 +41,10 @@ public class AuctionSignUpApplication {
 		user.setEmail("admin@admin.com");
 		user.setEnabled(true);
 		user.setAuthorities(authorityList);
-		user.setRole("ADMIN");
+		user.setRole("SELLER");
 		userDetailsRepository.save(user);
 		authorityList=new ArrayList<>();
-		authorityList.add(createAuthority("USER"));
+		authorityList.add(createAuthority("SELLER"));
 
 		User user2=new User();
 		user2.setFullName("Masum Islam");
