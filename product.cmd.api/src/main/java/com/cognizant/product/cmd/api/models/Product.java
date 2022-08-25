@@ -9,6 +9,8 @@ import org.springframework.data.annotation.Transient;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Data
@@ -30,11 +32,22 @@ public class Product implements Serializable {
     private int price;
     private int bidPrice;
     private String photoUrl;
-    private Date auctionEndTime;
+    private String auctionEndTime;
     private boolean isSold;
     private String bidderEmail;
     @Transient
     private String strAuctionEndTime;
+
+    public Date getAuctionEndTime(){
+        SimpleDateFormat formatter =new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+        Date date = new Date();
+        try {
+            date = formatter.parse(auctionEndTime);
+        } catch (ParseException e) {
+            System.out.printf("Date time parse exception: "+e.getMessage());
+        }
+        return date;
+    }
 /*
     public void setAuctionEndTime(String auctionEndTimeStr) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_PATTERN, Locale.ROOT);

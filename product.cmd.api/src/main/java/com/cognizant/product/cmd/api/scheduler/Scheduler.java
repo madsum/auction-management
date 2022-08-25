@@ -32,7 +32,7 @@ public class Scheduler {
         var result = productDbService.findBySold();
         result.forEach(product -> {
             System.out.println("stop");
-            if( (product.getAuctionEndTime() != null && (product.getAuctionEndTime().getTime() < System.currentTimeMillis())) ){
+            if( (product.getAuctionEndTime().getTime() < System.currentTimeMillis())) {
                 if(sendmail(product)){
                     product.setSold(true);
                     productDbService.updateProduct(product);

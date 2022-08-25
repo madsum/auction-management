@@ -29,10 +29,10 @@ public class ProductRequest implements Serializable {
     private MultipartFile file;
     private int bidPrice;
     private String photoUrl;
-    private Date auctionEndTime;
+    private String auctionEndTime;
     private boolean isSold;
     private String  bidderEmail;
-    public void setAuctionEndTime(String auctionEndTimeStr) {
+/*    public void setAuctionEndTime(String auctionEndTimeStr) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_PATTERN, Locale.ROOT);
         try {
             ZonedDateTime zdt = ZonedDateTime.parse(auctionEndTimeStr, dateTimeFormatter.withZone(ZoneId.systemDefault()));
@@ -41,5 +41,5 @@ public class ProductRequest implements Serializable {
             System.out.printf(e.getMessage());
         }
 
-    }
+    }*/
 }
