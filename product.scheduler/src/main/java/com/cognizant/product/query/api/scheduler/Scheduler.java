@@ -32,8 +32,7 @@ public class Scheduler {
         log.info("ScheduleCall on every "+schedulerRate/1000+" seconds");
         var result = productDbService.findBySold();
         result.forEach(product -> {
-            System.out.println("stop");
-            if( (product.getAuctionEndTime() != null && (product.getAuctionEndTime().getTime() < System.currentTimeMillis())) ){
+            if( (product.getAuctionEndTime() != null && (product.getAuctionEndTime().getTime() < System.currentTimeMillis()) && product.getBidPrice() > product.getPrice()) ){
                 if(sendmail(product)){
                     product.setSold(true);
                     productDbService.updateProduct(product);
@@ -61,6 +60,7 @@ public class Scheduler {
                 msg.setSentDate(new Date());
                 Transport.send(msg);
                 emailSuccessful = true;
+                log.info("Email sent successfully to : "+product.getBidderEmail());
             }else{
                 return emailSuccessful;
             }

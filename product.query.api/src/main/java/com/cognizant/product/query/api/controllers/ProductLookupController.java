@@ -6,6 +6,7 @@ import com.cognizant.product.query.api.dto.ProductLookupResponse;
 import com.cognizant.product.query.api.queries.FindAllProductQuery;
 import com.cognizant.product.query.api.queries.FindProductByIdQuery;
 import com.cognizant.product.query.api.queries.SearchProductQuery;
+import com.cognizant.product.query.api.service.FindSoldProductService;
 import org.apache.commons.io.IOUtils;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
@@ -32,10 +33,13 @@ public class ProductLookupController {
     private final QueryGateway queryGateway;
     private final AppProperty appProperty;
 
+    private final FindSoldProductService findSoldProductService;
+
     @Autowired
-    public ProductLookupController(QueryGateway queryGateway, AppProperty appProperty) {
+    public ProductLookupController(QueryGateway queryGateway, AppProperty appProperty, FindSoldProductService findSoldProductService) {
         this.queryGateway = queryGateway;
         this.appProperty = appProperty;
+        this.findSoldProductService = findSoldProductService;
         this.appProperty.init();
     }
 
@@ -43,18 +47,18 @@ public class ProductLookupController {
     public List<Product> getAllProducts() {
         try {
             var query = new FindAllProductQuery();
-            var response = queryGateway.query(query, ResponseTypes.instanceOf(ProductLookupResponse.class)).join();
-
-            if (response == null || response.getProducts() == null) {
+            //var response = queryGateway.query(query, ResponseTypes.instanceOf(ProductLookupResponse.class)).join();
+            var response = findSoldProductService.findAllProduct();
+/*            if (response == null || response.getProducts() == null) {
                 throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No product found", null);
-            }
-            response.getProducts().forEach(product -> {
+            }*/
+            response.forEach(product -> {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
                 if(product.getAuctionEndTime() != null){
                     product.setStrAuctionEndTime(dateFormat.format(product.getAuctionEndTime()));
                 }
             });
-            return response.getProducts();
+            return response;
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Failed to complete get all product request", e);
         }

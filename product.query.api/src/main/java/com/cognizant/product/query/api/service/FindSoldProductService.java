@@ -18,6 +18,10 @@ public class FindSoldProductService {
         this.mongoTemplate = mongoTemplate;
     }
 
+    public List<Product> findAllProduct(){
+        return mongoTemplate.findAll(Product.class);
+    }
+
     List<Product> findBySold(){
         Query query = new Query()
                 .addCriteria(Criteria.where("product.isSold").is(true));

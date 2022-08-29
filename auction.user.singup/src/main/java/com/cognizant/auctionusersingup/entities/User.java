@@ -20,7 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 
-@Document(collection = "USER")
+@Document(collection = "user")
 public class User implements UserDetails {
 
 	@Id

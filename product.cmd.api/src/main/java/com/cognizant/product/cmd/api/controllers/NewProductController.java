@@ -5,6 +5,7 @@ import com.cognizant.core.models.ProductRequest;
 import com.cognizant.product.cmd.api.commands.NewProductCommand;
 import com.cognizant.product.cmd.api.config.AppProperty;
 import com.cognizant.product.cmd.api.dto.NewProductResponse;
+import com.cognizant.product.cmd.api.service.ProductDbService;
 import com.cognizant.product.cmd.api.service.StorageService;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,14 @@ public class NewProductController {
     private final AppProperty appProperty;
     private final StorageService storageService;
 
+    private final ProductDbService productDbService;
+
     @Autowired
-    public NewProductController(CommandGateway commandGateway, AppProperty appProperty, StorageService storageService) {
+    public NewProductController(CommandGateway commandGateway, AppProperty appProperty, StorageService storageService, ProductDbService productDbService) {
         this.commandGateway = commandGateway;
         this.appProperty = appProperty;
         this.storageService = storageService;
+        this.productDbService = productDbService;
         this.appProperty.init();
     }
 
@@ -63,7 +67,8 @@ public class NewProductController {
         command.setId(id);
 
         try {
-            commandGateway.sendAndWait(command);
+           // commandGateway.sendAndWait(command);
+            productDbService.updateProduct(product);
             return new ResponseEntity<>(new NewProductResponse(id, "Product successfully registered!"), HttpStatus.CREATED);
         } catch (Exception e) {
             var safeErrorMessage = "Error while processing new product request for id - " + id;
