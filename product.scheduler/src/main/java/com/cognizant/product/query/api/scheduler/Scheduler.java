@@ -25,7 +25,6 @@ public class Scheduler {
         this.productDbService = productDbService;
     }
 
-  //  @Async
     @Scheduled(fixedRateString="${scheduler_rate}")
     public void scheduleCall(){
         log.info("ScheduleCall on every "+schedulerRate/1000+" seconds");
