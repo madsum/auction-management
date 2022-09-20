@@ -15,7 +15,6 @@ import javax.mail.internet.MimeMessage;
 import java.util.Date;
 
 @Component
-//@EnableAsync
 @Log
 public class Scheduler {
    private final ProductDbService productDbService;
@@ -32,7 +31,6 @@ public class Scheduler {
         log.info("ScheduleCall on every "+schedulerRate/1000+" seconds");
         var result = productDbService.findBySold();
         result.forEach(product -> {
-            System.out.println("stop");
             if( (product.getAuctionEndTime() != null && (product.getAuctionEndTime().getTime() < System.currentTimeMillis())) ){
                 if(sendmail(product)){
                     product.setSold(true);

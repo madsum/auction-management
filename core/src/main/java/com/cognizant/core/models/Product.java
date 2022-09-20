@@ -10,7 +10,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Locale;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,8 +38,8 @@ public class Product implements Serializable {
     private String bidderEmail;
     @Transient
     private String strAuctionEndTime;
-/*
-    public void setAuctionEndTime(String auctionEndTimeStr) {
+
+/*    public void setAuctionEndTime(String auctionEndTimeStr) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_PATTERN, Locale.ROOT);
         ZonedDateTime zdt = ZonedDateTime.parse(auctionEndTimeStr, dateTimeFormatter.withZone(ZoneId.systemDefault()));
         auctionEndTime = Date.from(zdt.toInstant());

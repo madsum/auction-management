@@ -27,7 +27,7 @@ public class UpdateProductController {
     public ResponseEntity<BaseResponse> updateUser(@PathVariable(value = "id") String id,
                                                    @Valid  @RequestBody UpdateProductCommand command) {
         try {
-           // command.setId(id);
+           // command.set   Id(id);
            // commandGateway.sendAndWait(command);
             productDbService.updateProduct(command.getProduct());
             return new ResponseEntity<>(new BaseResponse("Product successfully updated!"), HttpStatus.OK);

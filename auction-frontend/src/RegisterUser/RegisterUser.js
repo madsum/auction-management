@@ -254,7 +254,6 @@ const RegisterUser = () => {
                         </label>
                         <label>
                             <select id="select-size" value={role} onChange={handleChange}>
-                            <option value="ADMIN">Admin</option>
                             <option value="BUYER">Buyer</option>
                             <option value="SELLER">Seller</option>
                             </select>
