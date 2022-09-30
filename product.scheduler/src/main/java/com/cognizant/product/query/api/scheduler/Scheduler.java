@@ -58,6 +58,7 @@ public class Scheduler {
                 msg.setSentDate(new Date());
                 Transport.send(msg);
                 emailSuccessful = true;
+                log.info("Email sent to: "+product.getBidderEmail() );
             }else{
                 return emailSuccessful;
             }

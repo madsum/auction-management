@@ -5,7 +5,7 @@ import axios from 'axios';
 import * as React from 'react';
 import './RegisterUser.css'
 
-const   FULL_NAME_REGX = /^[a-zA-Z0-9 ]+$/;
+const FULL_NAME_REGX = /^[a-zA-Z0-9 ]+$/;
 const EMAIL_REGX = /^(?![\w\.@]*\.\.)(?![\w\.@]*\.@)(?![\w\.]*@\.)\w+[\w\.]*@[\w\.]+\.\w{2,}$/;
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
